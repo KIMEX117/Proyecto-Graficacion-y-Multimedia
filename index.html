@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page - P5 Designer</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="public/images/logo-blanco.png">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+    <!-- BOOTSTRAP 5.3.0 -->
+    <link rel="stylesheet" href="public/libs/bootstrap-5.3.0/css/bootstrap.min.css">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="public/libs/fontawesome/css/all.min.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="public/css/main.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <nav id="header" class="navbar navbar-expand-lg navbar-dark text-white bgcolor-secondary">
+        <div class="container">
+            <a class="navbar-brand d-flex" href="">
+                <img src="public/images/logo-blanco.png" height="60" alt="asd">
+                <div class="d-flex flex-column justify-content-center ms-3">
+                    <h1 class="logo-title fs-20 mb-2">P5 Designer</h1>
+                    <h2 class="logo-subtitle fs-14 mb-0">Software de diseño</h2>
+                </div>
+            </a>
+            <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-white fs-22"></span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav navbar-options">
+                    <li class="nav-item"><a class="nav-link px-3" href="">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="">Testimonios</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="">Precios</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 pe-4" href="">Iniciar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 my-3 main-btn" href="">Comenzar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav><!-- end header -->
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content landing-page">
+
+        <!-- MAIN BANNER -->
+        <div class="main-banner d-flex justify-content-center align-items-center p-5">
+            <div class="container d-flex flex-column justify-content-center align-items-center w-100 h-100">
+                <h1 class="mb-5">
+                    ¡Una simple idea puede cambiar al mundo!
+                </h1>
+                <h2 class="mb-5">
+                    Inicia tu prueba gratuita, sin cobros adicionales.
+                </h2>
+                <h3 class="mb-5">
+                    Comienza ahora a crear tus propios diseños en nuestra plataforma online y únete a la familia P5 Designer. 
+                </h3>
+                <a href="" class="main-btn px-3 mb-4">
+                    INICIA TU PRUEBA
+                </a>
+            </div>
+        </div><!-- end main banner -->
+
+        <!-- PACKAGE PRICES -->
+        <div class="package-prices bgcolor-gray">
+            <div class="container p-5">
+                <h1 class="page-subtitle pb-2 mb-5">
+                    Precio de paquetes
+                </h1>
+                <!-- ROW -->
+                <div class="row justify-content-center">
+                    <!-- COLUMN -->
+                    <div class="col-lg-4 col-md-8 px-md-4 mb-5">
+                        <!-- CARD PACKAGE PRICE #1 -->
+                        <div class="card-price h-100">
+                            <div class="card-details">
+                                <span class="card-top-color"></span>
+                                <div class="card-subtitles px-4 py-3">
+                                    <h3 class="mb-3">Inicial</h3>
+                                    <h2 class="mb-3">Gratuita</h2>
+                                    <h3>Permanente</h3>
+                                </div>
+                                <div class="card-benefit-info px-4">
+                                    <ul class="list-unstyled text-start">
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>5 archivos colaborativos
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Archivos personales ilimitados
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Plantillas, widgets y plugins
+                                        </li>
+                                        <li class="d-flex align-items-center mb-0">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Aplicación móvil
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-select-package px-4 pb-4 mt-2">
+                                <button class="main-btn bgcolor-white px-4">
+                                    ELEGIR INICIAL
+                                </button>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                    <div class="col-lg-4 col-md-8 px-md-4 mb-5">
+                        <!-- CARD PACKAGE PRICE #2 -->
+                        <div class="card-price h-100">
+                            <div class="card-details">
+                                <span class="card-top-color bgcolor-green"></span>
+                                <div class="card-subtitles px-4 py-3">
+                                    <h3 class="mb-3">Profesional</h3>
+                                    <h2 class="mb-3">$299.00 MXN</h2>
+                                    <h3>Pago anual o $349.00 MXN de forma mensual</h3>
+                                </div>
+                                <div class="card-benefit-info px-4">
+                                    <ul class="list-unstyled text-start">
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>45 archivos colaborativos
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Archivos personales ilimitados
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Plantillas, widgets y plugins
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Historial de cambios
+                                        </li>
+                                        <li class="d-flex align-items-center mb-0">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Aplicación móvil
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-select-package px-4 pb-4 mt-2">
+                                <button class="main-btn main-btn-txtwhite bgcolor-green px-4 py-2">
+                                    ELEGIR PROFESIONAL
+                                </button>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                    <div class="col-lg-4 col-md-8 px-md-4 mb-5">
+                        <!-- CARD PACKAGE PRICE #3 -->
+                        <div class="card-price h-100">
+                            <div class="card-details">
+                                <span class="card-top-color bgcolor-purple"></span>
+                                <div class="card-subtitles px-4 py-3">
+                                    <h3 class="mb-3">Empresarial</h3>
+                                    <h2 class="mb-3">$4,599.00 MXN</h2>
+                                    <h3>Pago anual, sin alternativa mensual</h3>
+                                </div>
+                                <div class="card-benefit-info px-4">
+                                    <ul class="list-unstyled text-start">
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Archivos colaborativos ilimitados
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Archivos personales ilimitados
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Plantillas, widgets y plugins
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Historial de cambios
+                                        </li>
+                                        <li class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Soporte técnico preferencial
+                                        </li>
+                                        <li class="d-flex align-items-center mb-0">
+                                            <i class="fas fa-check fs-16 pe-3"></i>Aplicación móvil
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-select-package px-4 pb-4 mt-2">
+                                <button class="main-btn main-btn-txtwhite bgcolor-purple px-4">
+                                    ELEGIR EMPRESARIAL
+                                </button>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end package prices -->
+
+        <!-- TESTIMONIALS -->
+        <div class="testimonials bgcolor-primary">
+            <div class="container p-5">
+                <h1 class="page-subtitle text-white pb-2 mb-5">
+                    TESTIMONIOS
+                </h1>
+                <!-- ROW -->
+                <div class="row justify-content-center">
+                    <!-- COLUMN -->
+                    <div class="col-xl-4 col-lg-5 col-md-8 px-md-4 d-flex align-items-center mb-5">
+                        <!-- CARD TESTIMONIAL #1 -->
+                        <div class="card-testimonial px-4 py-3">
+                            <i class="fa-solid fa-quote-right mb-3"></i> 
+                            <p class="text-justify mb-3">
+                                Como principiante en diseño, encontré este sitio web de diseño muy útil y fácil de usar. Lo recomiendo ampliamente para todo tipo de proyectos.
+                            </p>
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+                                <h2 class="text-start mb-2 mb-sm-0">Valeria Meza</h2>
+                                <h3 class="text-end mb-0">Diseñadora Web</h3>
+                            </div>
+                        </div>
+                    </div><!-- end column -->
+                    <!-- COLUMN -->
+                    <div class="col-xl-4 col-lg-5 col-md-8 px-md-4 d-flex align-items-center mb-5">
+                        <!-- CARD TESTIMONIAL #2 -->
+                        <div class="card-testimonial px-4 py-3">
+                            <i class="fa-solid fa-quote-right mb-3"></i> 
+                            <p class="text-justify mb-3">
+                                Soy programador freelance, utilizo este sitio web de diseño a diario. Es una herramienta versátil que me permite trabajar en una amplia variedad de proyectos desde sitios web hasta aplicaciones móviles.
+                            </p>
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+                                <h2 class="text-start mb-2 mb-sm-0">Paúl Flores</h2>
+                                <h3 class="text-end mb-0">Programador</h3>
+                            </div>
+                        </div>
+                    </div><!-- end column -->
+                    <!-- COLUMN -->
+                    <div class="col-xl-4 col-lg-5 col-md-8 px-md-4 d-flex align-items-center mb-5">
+                        <!-- CARD TESTIMONIAL #3 -->
+                        <div class="card-testimonial px-4 py-3">
+                            <i class="fa-solid fa-quote-right mb-3"></i> 
+                            <p class="text-justify mb-3">
+                                Es una excelente alternativa a Figma y Adobe XD. Ofrece todas las características que necesito para crear diseños impresionantes, y me encanta su interfaz sencilla e intuitiva.
+                            </p>
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+                                <h2 class="text-start mb-2 mb-sm-0">Pablo Cota</h2>
+                                <h3 class="text-end mb-0">Diseñador UI/UX</h3>
+                            </div>
+                        </div>
+                    </div><!-- end column -->
+                    
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end testimonials -->
+
+        <!-- BLOG -->
+        <div class="blog bgcolor-gray">
+            <div class="container p-5">
+                <h1 class="page-subtitle mb-3">
+                    BLOG
+                </h1>
+                <h2 class="text-center mb-5">
+                    ENTRADAS MÁS RECIENTES
+                </h2>
+                <!-- ROW -->
+                <div class="row">
+                    <!-- COLUMN -->
+                    <div class="col-md-6 d-flex justify-content-center pe-sm-0 pe-md-4 pe-lg-0 mb-5">
+                        <!-- BLOG ENTRIES #1 -->
+                        <div class="blog-entries">
+                            <img src="public/images/blog-post1.jpg" class="mb-3" alt="Blog Post #1">
+                            <h3 class="mb-3">
+                                Mayo 10, 2023 <span>en Fotografía</span>
+                            </h3>
+                            <h2 class="text-justify mb-3">
+                                Importancia del prototipado de aplicaciones móviles
+                            </h2>
+                            <p class="text-justify mb-0">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis sem urna. Duis odio quam, posuere a finibus non, ultricies a eros...
+                            </p>
+                            <a href="" class="d-flex justify-content-end w-100">
+                                Ver más
+                            </a>
+                        </div><!-- end blog entries -->
+                    </div><!-- end column -->
+                    <!-- COLUMN -->
+                    <div class="col-md-6 d-flex justify-content-center ps-sm-0 ps-md-4 ps-lg-0 mb-5">
+                        <!-- BLOG ENTRIES #2 -->
+                        <div class="blog-entries">
+                            <img src="public/images/blog-post2.jpg" class="mb-3" alt="Blog Post #2">
+                            <h3 class="mb-3">
+                                Mayo 08, 2023 <span>en Gráficos</span>
+                            </h3>
+                            <h2 class="text-justify mb-3">
+                                Diseño atractivo de iconos y emotes
+                            </h2>
+                            <p class="text-justify mb-0">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis sem urna. Duis odio quam, posuere a finibus non, ultricies a eros...
+                            </p>
+                            <a href="" class="d-flex justify-content-end w-100">
+                                Ver más
+                            </a>
+                        </div><!-- end blog entries -->
+                    </div><!-- end column -->
+                </div><!-- end row -->
+            </div>
+        </div>
+
+    </div><!-- end main content -->
+    
+    <!-- FOOTER -->
+    <footer class="text-center text-lg-start text-white bgcolor-primary">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!--Grid row-->
+            <div class="row my-4">
+    
+                <!-- COLUMNA #1 (Logo y Acerca de nosotros) -->
+                <div class="col-md-4 col-sm-12 mb-4 mb-md-0">
+                    <!-- LOGO -->
+                    <div class="d-flex align-items-center justify-content-center mb-4 mx-auto" >
+                        <img src="public/images/logo-blanco.png" height="90" alt="" loading="lazy" />
+                        <div class="d-flex flex-column ms-3">
+                            <h1 class="logo-title mb-2">P5 Designer</h1>
+                            <h2 class="logo-subtitle mb-0">Software de diseño</h2>
+                        </div>
+                    </div>
+                    <!-- BREVE DESCRIPCIÓN -->
+                    <p class="text-justify">Somos una plataforma especializada en software de creación de diseños para la maquetación, enfocados principalmente en diseñadores y programadores, pero con herramientas fáciles de utilizar por cualquier personas sin importar el tipo de proyecto.</p>
+                </div>
+    
+                <!-- COLUMNA #2 (Temas de interes) -->
+                <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-center fw-bolder mb-4">Información</h5>
+                    <div class="footerInformacion">
+                        <ul class="list-unstyled text-start">
+                            <li class="mb-2">
+                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Testimonios</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Blog</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Precios</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Iniciar sesión</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Registrarse</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- COLUMNA #3 (Contactanos) -->
+                <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-center fw-bolder mb-4">Contáctanos</h5>
+                    <!-- CONTACTANOS -->
+                    <div class="footerContactanos">
+                        <ul class="list-unstyled text-start">
+                            <li>
+                                <p><i class="fas fa-map-marker-alt pe-2"></i>Baja California Sur, México</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-phone pe-2"></i>612 000 0000</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-envelope pe-2 mb-0"></i>contacto@p5_designer.mx</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-clock pe-2 mb-0"></i>Lunes a Sábados: 8:00am - 9:30pm</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+    
+        <!-- Copyright -->
+        <div class="text-center p-3 bgcolor-secondary">
+            <a class="text-white" href="">2022 © P5 Designer | Todos los derechos reservados</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="public/libs/bootstrap-5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
