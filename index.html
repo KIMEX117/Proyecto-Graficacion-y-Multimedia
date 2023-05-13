@@ -22,7 +22,7 @@
     <!-- HEADER -->
     <nav id="header" class="navbar navbar-expand-lg navbar-dark text-white bgcolor-secondary">
         <div class="container">
-            <a class="navbar-brand d-flex" href="">
+            <a class="navbar-brand d-flex" href="index.html">
                 <img src="public/images/logo-blanco.png" height="60" alt="asd">
                 <div class="d-flex flex-column justify-content-center ms-3">
                     <h1 class="logo-title fs-20 mb-2">P5 Designer</h1>
@@ -34,12 +34,11 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav navbar-options">
-                    <li class="nav-item"><a class="nav-link px-3" href="">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="">Testimonios</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="">Precios</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 pe-4" href="">Iniciar sesión</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 my-3 main-btn" href="">Comenzar</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#testimonios">Testimonios</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#blog">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#precios">Precios</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 pe-4" href="view/login.html">Iniciar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 my-3 main-btn" href="view/signup.html">Comenzar</a></li>
                 </ul>
             </div>
         </div>
@@ -60,14 +59,14 @@
                 <h3 class="mb-5">
                     Comienza ahora a crear tus propios diseños en nuestra plataforma online y únete a la familia P5 Designer. 
                 </h3>
-                <a href="" class="main-btn px-3 mb-4">
+                <a href="view/signup.html" class="main-btn px-3 mb-4">
                     INICIA TU PRUEBA
                 </a>
             </div>
         </div><!-- end main banner -->
 
         <!-- PACKAGE PRICES -->
-        <div class="package-prices bgcolor-gray">
+        <div id="precios" class="package-prices bgcolor-gray">
             <div class="container p-5">
                 <h1 class="page-subtitle pb-2 mb-5">
                     Precio de paquetes
@@ -191,7 +190,7 @@
         </div><!-- end package prices -->
 
         <!-- TESTIMONIALS -->
-        <div class="testimonials bgcolor-primary">
+        <div id="testimonios" class="testimonials bgcolor-primary">
             <div class="container p-5">
                 <h1 class="page-subtitle text-white pb-2 mb-5">
                     TESTIMONIOS
@@ -208,7 +207,7 @@
                             </p>
                             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
                                 <h2 class="text-start mb-2 mb-sm-0">Valeria Meza</h2>
-                                <h3 class="text-end mb-0">Diseñadora Web</h3>
+                                <h3 class="text-end mb-0">Diseñadora</h3>
                             </div>
                         </div>
                     </div><!-- end column -->
@@ -246,7 +245,7 @@
         </div><!-- end testimonials -->
 
         <!-- BLOG -->
-        <div class="blog bgcolor-gray">
+        <div id="blog" class="blog bgcolor-gray">
             <div class="container p-5">
                 <h1 class="page-subtitle mb-3">
                     BLOG
@@ -310,13 +309,13 @@
                 <!-- COLUMNA #1 (Logo y Acerca de nosotros) -->
                 <div class="col-md-4 col-sm-12 mb-4 mb-md-0">
                     <!-- LOGO -->
-                    <div class="d-flex align-items-center justify-content-center mb-4 mx-auto" >
+                    <a href="index.html" class="footer-logo d-flex align-items-center justify-content-center mb-4 mx-auto" >
                         <img src="public/images/logo-blanco.png" height="90" alt="" loading="lazy" />
                         <div class="d-flex flex-column ms-3">
                             <h1 class="logo-title mb-2">P5 Designer</h1>
                             <h2 class="logo-subtitle mb-0">Software de diseño</h2>
                         </div>
-                    </div>
+                    </a>
                     <!-- BREVE DESCRIPCIÓN -->
                     <p class="text-justify">Somos una plataforma especializada en software de creación de diseños para la maquetación, enfocados principalmente en diseñadores y programadores, pero con herramientas fáciles de utilizar por cualquier personas sin importar el tipo de proyecto.</p>
                 </div>
@@ -327,19 +326,19 @@
                     <div class="footerInformacion">
                         <ul class="list-unstyled text-start">
                             <li class="mb-2">
-                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Testimonios</a>
+                                <a href="#testimonios" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Testimonios</a>
                             </li>
                             <li class="mb-2">
-                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Blog</a>
+                                <a href="#blog" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Blog</a>
                             </li>
                             <li class="mb-2">
-                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Precios</a>
+                                <a href="#precios" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Precios</a>
                             </li>
                             <li class="mb-2">
-                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Iniciar sesión</a>
+                                <a href="view/login.html" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Iniciar sesión</a>
                             </li>
                             <li class="mb-2">
-                                <a href="" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Registrarse</a>
+                                <a href="view/signup.html" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Registrarse</a>
                             </li>
                         </ul>
                     </div>

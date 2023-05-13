@@ -34,6 +34,11 @@ img {
 a {
     text-decoration: none;
 }
+button,input {
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
 
 /*-----------------------------------------------*/
 /*                BACKGROUND COLOR               */
@@ -189,6 +194,9 @@ footer {
     -webkit-box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.5);
 }
+footer .footer-logo, footer .footer-logo:hover, footer .footer-logo:active  {
+    color: var(--white-color);
+}
 footer .footerInformacion {
     max-width: 150px;
     margin: 0 auto;
@@ -226,18 +234,18 @@ footer .footerContactanos {
     color: var(--white-color);
     text-align: center;
 }
-.landing-page .main-banner h1 {
+.landing-page .main-banner .container > h1 {
     font-size: 64px;
     font-weight: 700;
     max-width: 1100px;
 } 
-.landing-page .main-banner h2 {
+.landing-page .main-banner .container > h2 {
     font-size: 28px;
     font-weight: 600;
     font-style: italic;
     max-width: 850px;
 }
-.landing-page .main-banner h3 {
+.landing-page .main-banner .container > h3 {
     font-size: 28px;
     font-weight: 200;
     max-width: 900px;
@@ -245,29 +253,29 @@ footer .footerContactanos {
 
 /* MEDIA QUERIES */
 @media only screen and (max-width: 767px) {
-    .landing-page .main-banner h1 {
+    .landing-page .main-banner .container > h1 {
         font-size: 52px;
     }
-    .landing-page .main-banner h2 {
+    .landing-page .main-banner .container > h2 {
         font-size: 24px;
     }
-    .landing-page .main-banner h3 {
+    .landing-page .main-banner .container > h3 {
         font-size: 24px;
     }
 }
 @media only screen and (max-width: 576px) {
-    .landing-page .main-banner h1 {
+    .landing-page .main-banner .container > h1 {
         font-size: 44px;
     }
-    .landing-page .main-banner h2 {
+    .landing-page .main-banner .container > h2 {
         font-size: 20px;
     }
-    .landing-page .main-banner h3 {
+    .landing-page .main-banner .container > h3 {
         font-size: 20px;
     }
 }
 @media only screen and (max-width: 380px) {
-    .landing-page .main-banner h1 {
+    .landing-page .main-banner .container > h1 {
         font-size: 36px;
     }
 }
@@ -417,12 +425,122 @@ footer .footerContactanos {
 }
 
 /*-----------------------------------------------*/
-/*                     LOGIN                     */
+/*                LOGIN & SIGN UP                */
 /*-----------------------------------------------*/
 
-.login {
-    
+.card-login {
+    background-color: var(--primary-color);
+    border-radius: 25px;
+    position: relative;
+    width: 400px;
+    min-width: 350px;
+    max-width: 400px;
+    color: var(--white-color);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.35);
 }
+.card-login h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+.card-login label {
+    font-size: 18px;
+    font-weight: 500;
+    text-align: start;
+}
+.card-login input {
+    background-color: var(--white-color);
+    color: var(--black-color);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0.5em 0.6em;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* BUTTON SUBMIT */
+.card-login button[type="submit"], .card-login button[type="submit"]:active {
+    background-color: var(--black-color);
+    border: 1px solid #9F9F9F;
+    color: var(--white-color);
+    width: 100%;
+    min-height: 35px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.card-login button[type="submit"]:hover {
+    background-color: #313131;
+}
+
+/* SPAN SEPARATOR */
+.card-login span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+.card-login span::before, .card-login span::after {
+    border-bottom: 1px solid white;
+    content: "";
+    position: absolute;
+    top:  58.4%;
+    width: 38%;
+    z-index: 1;
+}
+.card-login span::before { left: 6%; }
+.card-login span::after { right: 6%; }
+
+/* BUTTONS (GOOGLE, FACEBOOK AND TWITTER) */
+.card-login button[type="button"] {
+    text-align: left;
+    color: var(--white-color);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    min-height: 35px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.btn-google { background-color: var(--google-color); }
+.btn-google:hover { background-color: #D6604C; }
+.btn-facebook { background-color: var(--facebook-color); }
+.btn-facebook:hover { background-color: #5C8CD4; }
+.btn-twitter { background-color: var(--twitter-color); }
+.btn-twitter:hover { background-color: #84CFEA; }
+
+/* LINK TO SIGN UP */
+.card-login h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+.card-login a {
+    color: var(--white-color);
+    text-decoration: underline;
+}
+.card-login a:hover { 
+    color: var(--hover-btn-color); 
+}
+.card-login button[type="submit"], .card-login button[type="button"], .card-login a {
+    transition: all 0.5s;
+}
+.card-login button[type="submit"]:hover, .card-login button[type="button"]:hover, .card-login a:hover {
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
 
 /*~~~~~~~~~~~~~~~~~~~~~*/
 /*      SUBTITULO      */
