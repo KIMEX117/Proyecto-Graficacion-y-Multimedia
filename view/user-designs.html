@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis diseños - P5 Designer</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../public/images/logo-blanco.png">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+    <!-- BOOTSTRAP 5.3.0 -->
+    <link rel="stylesheet" href="../public/libs/bootstrap-5.3.0/css/bootstrap.min.css">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="../public/libs/fontawesome/css/all.min.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="../public/css/main.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <nav id="header" class="navbar navbar-expand-lg navbar-dark text-white bgcolor-secondary">
+        <div class="container">
+            <a class="navbar-brand d-flex" href="../index.html">
+                <img src="../public/images/logo-blanco.png" height="60" alt="asd">
+                <div class="d-flex flex-column justify-content-center ms-3">
+                    <h1 class="logo-title fs-20 mb-2">P5 Designer</h1>
+                    <h2 class="logo-subtitle fs-14 mb-0">Software de diseño</h2>
+                </div>
+            </a>
+            <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon text-white fs-22"></span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav navbar-options">
+                    <li class="nav-item">
+                        <div class="user-data d-flex flex-column text-end pe-lg-4 pe-0 pt-lg-0 pt-3">
+                            <h3>DiseñadorPro123</h3>
+                            <h4 class="text-lg-end text-center">micorreo@mail.com</h4>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link px-3 my-3 main-btn logout-btn" href="signup.html">Cerrar sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav><!-- end header -->
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content user-designs bgcolor-primary">
+
+        <!-- USER DESIGNS -->
+        <div class="container d-flex flex-column h-100 p-5">
+            <h1 class="text-center text-md-start mb-3">
+                Mis diseños
+            </h1>
+            <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-center mb-5">
+                <h2 class="d-flex align-items-center mb-3 mb-md-0">
+                    Cantidad actual creados: <b class="ms-4">3</b>
+                </h2>
+                <a href="" class="main-btn add-btn bgcolor-add-btn px-3">
+                    DISEÑO NUEVO
+                </a>
+            </div>
+            <!-- LIST OF DESIGNS -->
+            <div class="designs-list">
+                <!-- ROW -->
+                <div class="row">
+                    <!-- ESTE MENSAJE ES EN CASO DE NO TENER NINGÚN DISEÑO CREADO -->
+                    <!-- <div class="col-md-12">
+                        <h3 class="designs-none d-flex justify-content-center align-items-center">
+                            Actualmente no hay diseños disponibles para mostrar.
+                        </h3>
+                    </div> -->
+                    <!-- COLUMN -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <!-- CARD DESIGN #1 -->
+                        <div class="card-design mb-4 p-2">
+                            <img src="../public/images/diseño-preview.png" class="mb-3" alt="">
+                            <div class="d-flex flex-column">
+                                <h1 class="mb-2">
+                                    Lorem ipsum
+                                </h1>
+                                <h2 class="d-flex align-items-center mb-3">
+                                    Editado: <span class="ms-1">16:04:12 08-05-2023</span>
+                                </h2>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <button type="button" class="main-btn remove-btn px-3">
+                                        ELIMINAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div><!-- end card design -->
+                    </div><!-- end col -->
+                    <!-- COLUMN -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <!-- CARD DESIGN #2 -->
+                        <div class="card-design mb-4 p-2">
+                            <img src="../public/images/diseño-preview.png" class="mb-3" alt="">
+                            <div class="d-flex flex-column">
+                                <h1 class="mb-2">
+                                    Lorem ipsum
+                                </h1>
+                                <h2 class="d-flex align-items-center mb-3">
+                                    Editado: <span class="ms-1">16:04:12 08-05-2023</span>
+                                </h2>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <button type="button" class="main-btn remove-btn px-3">
+                                        ELIMINAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div><!-- end card design -->
+                    </div><!-- end col -->
+                    <!-- COLUMN -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <!-- CARD DESIGN #3 -->
+                        <div class="card-design mb-4 p-2">
+                            <img src="../public/images/diseño-preview.png" class="mb-3" alt="">
+                            <div class="d-flex flex-column">
+                                <h1 class="mb-2">
+                                    Lorem ipsum
+                                </h1>
+                                <h2 class="d-flex align-items-center mb-3">
+                                    Editado: <span class="ms-1">16:04:12 08-05-2023</span>
+                                </h2>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <button type="button" class="main-btn remove-btn px-3">
+                                        ELIMINAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div><!-- end card design -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+
+            </div><!-- end list of designs -->
+        </div><!-- end user designs -->
+
+    </div><!-- end main content -->
+    
+    <!-- FOOTER -->
+    <footer class="text-center text-lg-start text-white bgcolor-primary">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!--Grid row-->
+            <div class="row my-4">
+    
+                <!-- COLUMNA #1 (Logo y Acerca de nosotros) -->
+                <div class="col-md-4 col-sm-12 mb-4 mb-md-0">
+                    <!-- LOGO -->
+                    <a href="../index.html" class="footer-logo d-flex align-items-center justify-content-center mb-4 mx-auto" >
+                        <img src="../public/images/logo-blanco.png" height="90" alt="" loading="lazy" />
+                        <div class="d-flex flex-column ms-3">
+                            <h1 class="logo-title mb-2">P5 Designer</h1>
+                            <h2 class="logo-subtitle mb-0">Software de diseño</h2>
+                        </div>
+                    </a>
+                    <!-- BREVE DESCRIPCIÓN -->
+                    <p class="text-justify">Somos una plataforma especializada en software de creación de diseños para la maquetación, enfocados principalmente en diseñadores y programadores, pero con herramientas fáciles de utilizar por cualquier personas sin importar el tipo de proyecto.</p>
+                </div>
+    
+                <!-- COLUMNA #2 (Temas de interes) -->
+                <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-center fw-bolder mb-4">Información</h5>
+                    <div class="footerInformacion">
+                        <ul class="list-unstyled text-start">
+                            <li class="mb-2">
+                                <a href="../index.html#testimonios" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Testimonios</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="../index.html#blog" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Blog</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="../index.html#precios" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Precios</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="login.html" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Iniciar sesión</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="signup.html" class="text-white"><i class="fas fa-circle fs-10 pe-3"></i>Registrarse</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- COLUMNA #3 (Contactanos) -->
+                <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-center fw-bolder mb-4">Contáctanos</h5>
+                    <!-- CONTACTANOS -->
+                    <div class="footerContactanos">
+                        <ul class="list-unstyled text-start">
+                            <li>
+                                <p><i class="fas fa-map-marker-alt pe-2"></i>Baja California Sur, México</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-phone pe-2"></i>612 000 0000</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-envelope pe-2 mb-0"></i>contacto@p5_designer.mx</p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-clock pe-2 mb-0"></i>Lunes a Sábados: 8:00am - 9:30pm</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+    
+        <!-- Copyright -->
+        <div class="text-center p-3 bgcolor-secondary">
+            <a class="text-white" href="">2022 © P5 Designer | Todos los derechos reservados</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../public/libs/bootstrap-5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/js/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
