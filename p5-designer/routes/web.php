@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DesignController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,19 +48,13 @@ Route::get('/signup', function () {
 
 Route::middleware(['auth'])->group(function() {
 
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    /*     HOME - ESPACIO DE TRABAJOS DEL USUARIO (Mis diseños)    */
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    Route::get('/home', function () {
-        return view('users.home');
-    })->name('home');
-
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    /*     PROJECT - PÁGINA DE PROYECTO    */
-    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    Route::get('/project', function () {
-        return view('designs.create');
-    })->name('project');
+    //DESIGNS - DISEÑOS
+    Route::get('/home', [DesignController::class, 'index'])->name('home');
+    Route::get('/design', [DesignController::class,'create'])->name('design.create');
+    Route::post('/design', [DesignController::class,'store'])->name('design.store');
+    Route::get('/design/{id}/edit', [DesignController::class,'edit'])->name('design.edit');
+    Route::put('/design/{id}', [DesignController::class,'update'])->name('design.update');
+    Route::delete('/design/{id}', [DesignController::class,'destroy'])->name('design.delete');
 
 });
 
@@ -68,4 +63,3 @@ Route::post('/user', [UserController::class,'store'])->name('user.store');
 Route::put('/user/{id}', [UserController::class,'update'])->name('user.update');
 Route::get('/user/{id}/delete', [UserController::class,'destroy'])->name('user.destroy');
 
-//DESIGNS - DISEÑOS

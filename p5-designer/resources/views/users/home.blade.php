@@ -47,91 +47,105 @@
             </h1>
             <div class="d-flex flex-column flex-md-row justify-content-md-between align-items-center mb-5">
                 <h2 class="d-flex align-items-center mb-3 mb-md-0">
-                    Cantidad actual creados: <b class="ms-4">3</b>
+                    Cantidad actual creados: 
+                    <b class="ms-4">
+                        @if (isset($designs))
+                            {{count($designs)}}
+                        @endif
+                    </b>
                 </h2>
-                <a href="" class="main-btn add-btn bgcolor-add-btn px-3">
+                <a href="{{route('design.create')}}" class="main-btn add-btn bgcolor-add-btn px-3">
                     DISEÑO NUEVO
                 </a>
             </div>
             <!-- LIST OF DESIGNS -->
             <div class="designs-list">
+                {{-- MENSAJES DE ALERTA DEL RESPONSE AL ELIMINAR UN DISEÑO --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Éxito</strong> - {{session('success')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session('error'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Error</strong> - {{session('error')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <!-- ROW -->
                 <div class="row">
-                    <!-- ESTE MENSAJE ES EN CASO DE NO TENER NINGÚN DISEÑO CREADO -->
-                    <!-- <div class="col-md-12">
-                        <h3 class="designs-none d-flex justify-content-center align-items-center">
-                            Actualmente no hay diseños disponibles para mostrar.
-                        </h3>
-                    </div> -->
-                    <!-- COLUMN -->
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <!-- CARD DESIGN #1 -->
-                        <div class="card-design mb-4 p-2">
-                            <img src="{{asset('images/diseño-preview.png')}}" class="mb-3" alt="">
-                            <div class="d-flex flex-column">
-                                <h1 class="mb-2">
-                                    Lorem ipsum
-                                </h1>
-                                <h2 class="d-flex align-items-center mb-3">
-                                    Editado: <span class="ms-1">16:04:12 08-05-2023</span>
-                                </h2>
-                                <div class="d-flex justify-content-center mb-2">
-                                    <button type="button" class="main-btn remove-btn px-3">
-                                        ELIMINAR
-                                    </button>
-                                </div>
+                    @if (isset($designs))
+                        @if (count($designs)>0)
+                            {{-- SI SE TIENE AL MENOS UN DISEÑO CREADO, SE MUESTRA EN PANTALLA LA TARJETA --}} 
+                            @foreach ($designs as $design)
+                                <!-- COLUMN -->
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <!-- CARD DESIGN #1 -->
+                                    <div class="card-design mb-4 p-2">
+                                        <img src="{{asset('images/diseño-preview.png')}}" class="mb-3" alt="">
+                                        <div class="d-flex flex-column">
+                                            <h1 class="mb-2">
+                                                {{$design->title}}
+                                            </h1>
+                                            <h2 class="d-flex align-items-center mb-3">
+                                                Editado: <span class="ms-1">{{$design->updated_at}}</span>
+                                            </h2>
+                                            <div class="d-flex justify-content-center mb-2">
+                                                <form id="formDestroy" action="{{route('design.delete', $design->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <input type="text" name="id" value="{{$design->id}}" hidden>
+                                                </form>
+                                                <button type="button" onclick="destroy({{$design->id}})"  class="main-btn remove-btn px-3">
+                                                    ELIMINAR
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div><!-- end card design -->
+                                </div><!-- end col -->
+                            @endforeach
+                        @else
+                            {{-- ESTE MENSAJE ES EN CASO DE NO TENER NINGÚN DISEÑO CREADO --}} 
+                            <div class="col-md-12">
+                                <h3 class="designs-none d-flex justify-content-center align-items-center">
+                                    Actualmente no hay diseños disponibles para mostrar.
+                                </h3>
                             </div>
-                        </div><!-- end card design -->
-                    </div><!-- end col -->
-                    <!-- COLUMN -->
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <!-- CARD DESIGN #2 -->
-                        <div class="card-design mb-4 p-2">
-                            <img src="{{asset('images/diseño-preview.png')}}" class="mb-3" alt="">
-                            <div class="d-flex flex-column">
-                                <h1 class="mb-2">
-                                    Lorem ipsum
-                                </h1>
-                                <h2 class="d-flex align-items-center mb-3">
-                                    Editado: <span class="ms-1">16:04:12 08-05-2023</span>
-                                </h2>
-                                <div class="d-flex justify-content-center mb-2">
-                                    <button type="button" class="main-btn remove-btn px-3">
-                                        ELIMINAR
-                                    </button>
-                                </div>
-                            </div>
-                        </div><!-- end card design -->
-                    </div><!-- end col -->
-                    <!-- COLUMN -->
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <!-- CARD DESIGN #3 -->
-                        <div class="card-design mb-4 p-2">
-                            <img src="{{asset('images/diseño-preview.png')}}" class="mb-3" alt="">
-                            <div class="d-flex flex-column">
-                                <h1 class="mb-2">
-                                    Lorem ipsum
-                                </h1>
-                                <h2 class="d-flex align-items-center mb-3">
-                                    Editado: <span class="ms-1">16:04:12 08-05-2023</span>
-                                </h2>
-                                <div class="d-flex justify-content-center mb-2">
-                                    <button type="button" class="main-btn remove-btn px-3">
-                                        ELIMINAR
-                                    </button>
-                                </div>
-                            </div>
-                        </div><!-- end card design -->
-                    </div><!-- end col -->
+                        @endif 
+                    @endif
+
                 </div><!-- end row -->
 
             </div><!-- end list of designs -->
         </div><!-- end user designs -->
+        @if (isset($designs))
+        {{ $designs }} {{-- YA TRAE LOS DISEÑOS FILTRADOS POR ID  --}}
+        @endif
 
     </div><!-- end main content -->
     
     @include('layouts.footer')
 
     @include('layouts.scripts')
+
+    <script>
+        function destroy(id){
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Confirme esta acción para eliminar",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0ab39c',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, ¡Eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("formDestroy").submit();
+                }
+            })
+        }
+    </script>
 </body>
 </html>

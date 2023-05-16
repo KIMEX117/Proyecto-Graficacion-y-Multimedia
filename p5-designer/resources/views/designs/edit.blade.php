@@ -5,7 +5,12 @@
     <title>Proyecto - P5 Designer</title>
 </head>
 <body class="user-project">
-    <form action="" method="" class="d-flex flex-column h-100">
+    <form action="{{ url('/design/'.$design->id) }}" method="POST" class="d-flex flex-column h-100">
+        @csrf
+        @method('put')
+        <input type="text" id="user_id" name="user_id" value="{{auth()->id()}}" hidden>
+        <input type="text" id="inputData" name="data" hidden>
+
         <!-- TOOLBAR -->
         <div class="header-toolbar ps-2">
             <!-- FIGURES BAR -->
@@ -36,7 +41,7 @@
             </div>
             <!-- PROJECT TITLE -->
             <div class="project-title d-flex justify-content-center align-items-center">
-                <input type="text" name="title" id="" value="Lorem ipsum" required>
+                <input type="text" name="title" id="" value="{{$design->title}}" required>
             </div>
             <!-- PROJECT SAVE -->
             <div class="project-save d-flex justify-content-center align-items-center">
@@ -138,7 +143,7 @@
 
             <!-- AREA CANVAS -->
             <div class="area-canvas">
-
+                {{ $design }}
             </div>
 
             <!-- SIDEBAR OPTIONS -->
@@ -156,28 +161,28 @@
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">X:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "Y" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">Y:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "W" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">W:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "H" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">H:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "ROUNDED CORNER" -->
@@ -186,7 +191,7 @@
                                 <label for="">
                                     <img src="{{asset('images/icono-curva.png')}}" class="me-1" alt="">:
                                 </label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                     </div><!-- end row -->
@@ -215,21 +220,21 @@
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">R:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "G" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">G:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "B" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">B:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "OPACITY" -->
@@ -238,7 +243,7 @@
                                 <label for="" class="d-flex align-items-center">
                                     <img src="{{asset('images/icono-opacidad.png')}}" alt="">:
                                 </label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                     </div><!-- end row -->
@@ -267,21 +272,21 @@
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">R:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "G" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">G:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "B" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">B:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "OPACITY" -->
@@ -290,14 +295,14 @@
                                 <label for="" class="d-flex align-items-center">
                                     <img src="{{asset('images/icono-opacidad.png')}}" alt="">:
                                 </label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                         <!-- INPUT "THICKNESS" -->
                         <div class="col-12 mb-2">
                             <div class="d-flex justify-content-center">
                                 <label for="">Grosor:</label>
-                                <input type="text" name="" id="" class="ms-2" required>
+                                <input type="text" name="" id="" class="ms-2" >
                             </div>
                         </div>
                     </div><!-- end row -->
@@ -309,5 +314,40 @@
     </form><!-- end form -->
 
     @include('layouts.scripts')
+    <script>
+        var prueba = @json($design);
+        console.log(prueba);
+        console.log(prueba.title);
+        console.log(prueba.data);
+        console.log("---------------------")
+        var qwerty = JSON.parse(prueba.data)
+        console.log(qwerty);
+        console.log("---------------------")
+        console.log("Primer elemento tipo: "+qwerty[0].type);
+        console.log("Segundo elemento tipo: "+qwerty[1].type);
+        console.log("---------------------")
+
+        var figuras = [
+            {
+                "type": "elipse",
+                "x": 1,
+                "y": 2,
+                "w": 3,
+                "h": 4,
+            },
+            {
+                "type": "rect",
+                "x": 5,
+                "y": 6,
+                "w": 7,
+                "h": 8,
+            },
+        ];
+        console.log("InputData 'EDIT' (previo) JSON:"+document.getElementById("inputData").value)
+
+        document.getElementById("inputData").value = JSON.stringify(figuras);
+
+        console.log("InputData 'EDIT' (posterior) JSON:"+document.getElementById("inputData").value)
+    </script>
 </body>
 </html>
