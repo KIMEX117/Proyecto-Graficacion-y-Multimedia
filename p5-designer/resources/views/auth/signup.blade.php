@@ -12,7 +12,20 @@
 
         <!-- MAIN BANNER -->
         <div class="main-banner d-flex justify-content-center align-items-center p-5">
-            <div class="container d-flex justify-content-center align-items-center w-100 h-100">
+            <div class="container d-flex flex-column justify-content-center align-items-center w-100 h-100">
+                {{-- MENSAJES DE ÉXITO Y ERROR --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Éxito</strong> - {{session('success')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session('error'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Error</strong> - {{session('error')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <!-- CARD LOGIN -->
                 <div class="card-login p-4">
                     <form action="{{ route('user.store') }}" method="POST">
@@ -22,7 +35,7 @@
                         </h1>
                         <div class="d-flex flex-column mb-3">
                             <label for="username" class="mb-1">Nombre de usuario:</label>
-                            <input type="text" name="username" value="{{old('username')}}" placeholder="username">
+                            <input type="text" name="username" value="{{old('username')}}" placeholder="Mínimo 5 caracteres" minlength="5" maxlength="16">
                             @error('username')
                                 <div>
                                     {{$message}}
@@ -31,7 +44,7 @@
                         </div>
                         <div class="d-flex flex-column mb-3">
                             <label for="email" class="mb-1">Correo electrónico:</label>
-                            <input type="email" name="email" value="{{old('email')}}" placeholder="micorreo@gmail.com">
+                            <input type="email" name="email" value="{{old('email')}}" placeholder="ejemplo@mail.com">
                             @error('email')
                                 <div>
                                     {{$message}}
@@ -40,7 +53,7 @@
                         </div>
                         <div class="d-flex flex-column mb-4">
                             <label for="password" class="mb-1">Contraseña:</label>
-                            <input type="password" name="password" id="" placeholder="∗ ∗ ∗ ∗ ∗ ∗ ∗ ∗ ∗">
+                            <input type="password" name="password" id="" placeholder="Mínimo 8 caracteres" minlength="8" maxlength="16">
                             @error('password')
                                 <div>
                                     {{$message}}
@@ -49,8 +62,8 @@
                         </div>
                         <div class="d-flex flex-column mb-4">
                             <label for="repeat_password" class="mb-1">Repetir contraseña:</label>
-                            <input type="password" name="repeat_password" id="" placeholder="∗ ∗ ∗ ∗ ∗ ∗ ∗ ∗ ∗">
-                            @error('repeat_password')
+                            <input type="password" name="password_confirmation" id="" placeholder="∗ ∗ ∗ ∗ ∗ ∗ ∗ ∗ ∗" minlength="8" maxlength="16">
+                            @error('password_confirmation')
                                 <div>
                                     {{$message}}
                                 </div>

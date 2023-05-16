@@ -32,17 +32,20 @@ class UserController extends Controller
     {
         /* VALIDACIONES */
         $request->validate([
-            'username'      => 'required',
-            'email'     => 'required|unique:users|string|max:50',
-            'password'  => ['required', Password::min(8)],
+            'username'              => 'required',
+            'email'                 => 'required|unique:users|string|max:50',
+            'password'              => ['required', 'confirmed', Password::min(8)],
+            'password_confirmation' => ['required', Password::min(8)],
         ],
         [   
-            'username.required' => 'Es necesario ingresar un nombre.',
-            'email.required'    => 'Es necesario ingresar un correo electrónico.',
-            'email.unique'      => 'Otro usuario ya tiene ese correo electrónico.',
-            'email.max'         => 'El email no debe exceder los 50 caracteres.',
-            'password.required' => 'Es necesario ingresar una contraseña.',
-            'password.min'      => 'La contraseña debe tener minimo 8 caracteres.',
+            'username.required'              => 'Es necesario ingresar un nombre.',
+            'email.required'                 => 'Es necesario ingresar un correo electrónico.',
+            'email.unique'                   => 'Otro usuario ya tiene ese correo electrónico.',
+            'email.max'                      => 'El email no debe exceder los 50 caracteres.',
+            'password.required'              => 'Es necesario ingresar una contraseña.',
+            'password.min'                   => 'La contraseña debe tener minimo 8 caracteres.',
+            'password_confirmation.required' => 'Es necesario que repita la contraseña.',
+            'password_confirmation.min'      => 'Este campo tambien debe tener minimo 8 caracteres.',
         ]);
 
         /* INSTANCIA DE USER */
