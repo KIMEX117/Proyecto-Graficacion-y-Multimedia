@@ -81,28 +81,31 @@
                             @foreach ($designs as $design)
                                 <!-- COLUMN -->
                                 <div class="col-lg-3 col-md-4 col-sm-6">
-                                    <!-- CARD DESIGN #1 -->
+                                    <!-- CARD DESIGN -->
                                     <div class="card-design mb-4 p-2">
-                                        <img src="{{asset('images/diseño-preview.png')}}" class="mb-3" alt="">
-                                        <div class="d-flex flex-column">
-                                            <h1 class="mb-2">
-                                                {{$design->title}}
-                                            </h1>
-                                            <h2 class="d-flex align-items-center mb-3">
-                                                Editado: <span class="ms-1">{{$design->updated_at}}</span>
-                                            </h2>
-                                            <div class="d-flex justify-content-center mb-2">
-                                                <form id="formDestroy" action="{{route('design.delete', $design->id)}}" method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <input type="text" name="id" value="{{$design->id}}" hidden>
-                                                </form>
-                                                <button type="button" onclick="destroy({{$design->id}})"  class="main-btn remove-btn px-3">
-                                                    ELIMINAR
-                                                </button>
+                                        <a href="{{url('/design/'.$design->id.'/edit')}}" class="text-white">
+                                            <img src="{{asset('images/diseño-preview.png')}}" class="mb-3" alt="">
+                                            <div class="d-flex flex-column">
+                                                <h1 class="mb-2">
+                                                    {{$design->title}}
+                                                </h1>
+                                                <h2 class="d-flex align-items-center mb-3">
+                                                    Editado: <span class="ms-1">{{$design->updated_at}}</span>
+                                                </h2>
+                                                
                                             </div>
+                                        </a>
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <form id="formDestroy" action="{{route('design.delete', $design->id)}}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="text" name="id" value="{{$design->id}}" hidden>
+                                            </form>
+                                            <button type="button" onclick="destroy({{$design->id}})"  class="main-btn remove-btn px-3">
+                                                ELIMINAR
+                                            </button>
                                         </div>
-                                    </div><!-- end card design -->
+                                    </div><!-- end card design -->  
                                 </div><!-- end col -->
                             @endforeach
                         @else

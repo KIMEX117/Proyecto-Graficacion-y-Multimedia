@@ -31,9 +31,9 @@
                     <button type="button" class="mx-1">
                         <img src="{{asset('images/icono-circulo.png')}}" alt="">
                     </button>
-                    <button type="button" class="mx-1">
+                    {{-- <button type="button" class="mx-1">
                         <img src="{{asset('images/icono-triangulo.png')}}" alt="">
-                    </button>
+                    </button> --}}
                     <button type="button" class="mx-1">
                         <img src="{{asset('images/icono-texto.png')}}" alt="">
                     </button>
