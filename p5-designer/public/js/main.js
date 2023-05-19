@@ -2,7 +2,7 @@ class Figura {
     constructor(tipoFigura) {
         this.id = Figura.generarID();
         this.type = tipoFigura;
-        this.visible = true;
+        this.hidden = false;
         this.selected = false;
         /* this.selected = false;
         this.dragging = false; */
@@ -103,6 +103,20 @@ class Figura {
         //Figura.contador++;
         //return Figura.contador;
         return Math.floor(Math.random() * (9999999 - 1000000 + 1) + 1000000)
+    }
+
+    cambiarColorPredeterminado(r, g, b, a, option) {
+        if(option==='fill') {
+            this.fill_r = r;
+            this.fill_g = g;
+            this.fill_b = b;
+            this.fill_a = a;
+        } else if(option==='border') {
+            this.border_r = r;
+            this.border_g = g;
+            this.border_b = b;
+            this.border_a = a;
+        } 
     }
 
 }

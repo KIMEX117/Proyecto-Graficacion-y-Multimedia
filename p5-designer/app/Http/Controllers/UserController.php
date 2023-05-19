@@ -57,9 +57,9 @@ class UserController extends Controller
 
         /* CREAR REGISTRO */
         if($user){
-            return redirect()->back()->with('success', 'Se añadió el usuario de forma exitosa.');
+            return redirect()->back()->with('success', 'Se registró el usuario de forma exitosa.');
         }
-        return redirect()->back()->with('error', 'Hubo un error al añadir el cliente.');
+        return redirect()->back()->with('error', 'Hubo un error al tratar de registrarse.');
     }
 
     /**

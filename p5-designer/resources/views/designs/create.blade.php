@@ -56,11 +56,10 @@
                 <!-- ROW -->
                 <div class="row">
                     <!-- COLUMN -->
-                    <div v-for="figura in figuras" class="col-12">
-                        <!-- FIGURE INFO #1 -->
-                        <div v-if="figura.selected==false" class="d-flex justify-content-between align-items-center">
+                    <div v-for="figura in figuras" :class="figura.selected ? 'bgcolor-hover-btn' : ''" class="col-12">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
-                                <img src="{{asset('images/icono-circulo.png')}}" class="icon-figure" alt="">
+                                <img src="{{asset('images/icono-cuadrado.png')}}" class="icon-figure" alt="">
                                 <h3 class="name-figure ms-2 mb-0">
                                     @{{figura.type}}
                                 </h3>
@@ -72,32 +71,11 @@
                                 <button type="button">
                                     <i class="fa-solid fa-arrow-up"></i>
                                 </button>
-                                <button type="button">
-                                    <i class="fa-solid fa-eye"></i>
+                                <button type="button" :key="'ocultarFigura'+figura.id" :id="'ocultarFigura'+figura.id" @click="ocultarFigura(figura.id)">
+                                    <i v-if="figura.hidden==false" class="fa-solid fa-eye"></i>
+                                    <i v-else class="fas fa-eye-slash"></i>
                                 </button>
-                                <button type="button">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </div>
-                        </div><!-- end figure info -->
-                        <div v-else class="d-flex justify-content-between align-items-center" style="background-color: #99989C">
-                            <div class="d-flex align-items-center">
-                                <img src="{{asset('images/icono-circulo.png')}}" class="icon-figure" alt="">
-                                <h3 class="name-figure ms-2 mb-0">
-                                    @{{figura.type}}
-                                </h3>
-                            </div>
-                            <div class="btns-figure d-flex align-items-center">
-                                <button type="button">
-                                    <i class="fa-solid fa-arrow-down"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fa-solid fa-arrow-up"></i>
-                                </button>
-                                <button type="button">
-                                    <i class="fa-solid fa-eye"></i>
-                                </button>
-                                <button type="button">
+                                <button type="button" :key="'eliminarFigura'+figura.id" :id="'eliminarFigura'+figura.id" @click="eliminarFigura(figura.id)">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
@@ -126,28 +104,28 @@
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">X:</label>
-                                <input type="text" name="" id="x" class="ms-2" v-model="figuras[figuraID].x">
+                                <input type="number" name="" id="x" class="ms-2" min="0" v-model="figuraObjeto.x">
                             </div>
                         </div>
                         <!-- INPUT "Y" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">Y:</label>
-                                <input type="text" name="" id="y" class="ms-2" v-model="figuras[figuraID].y">
+                                <input type="number" name="" id="y" class="ms-2" min="0" v-model="figuraObjeto.y">
                             </div>
                         </div>
                         <!-- INPUT "W" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">W:</label>
-                                <input type="text" name="" id="w" class="ms-2" v-model="figuras[figuraID].w">
+                                <input type="number" name="" id="w" class="ms-2" min="0" v-model="figuraObjeto.w">
                             </div>
                         </div>
                         <!-- INPUT "H" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">H:</label>
-                                <input type="text" name="" id="h" class="ms-2" v-model="figuras[figuraID].h">
+                                <input type="number" name="" id="h" class="ms-2" min="0" v-model="figuraObjeto.h">
                             </div>
                         </div>
                         <!-- INPUT "ROUNDED CORNER" -->
@@ -156,7 +134,7 @@
                                 <label for="">
                                     <img src="{{asset('images/icono-curva.png')}}" class="me-1" alt="">:
                                 </label>
-                                <input type="text" name="" id="rounded_corner" class="ms-2" v-model="figuras[figuraID].corner">
+                                <input type="number" name="" id="rounded_corner" class="ms-2" min="0" v-model="figuraObjeto.corner">
                             </div>
                         </div>
                     </div><!-- end row -->
@@ -172,12 +150,12 @@
                     </div>
                     <!-- BUTTONS COLORS -->
                     <div class="d-flex justify-content-between px-3 mb-3">
-                        <button type="button" class="btn-color btn-color-black"></button>
-                        <button type="button" class="btn-color btn-color-white"></button>
-                        <button type="button" class="btn-color btn-color-yellow"></button>
-                        <button type="button" class="btn-color btn-color-red"></button>
-                        <button type="button" class="btn-color btn-color-green"></button>
-                        <button type="button" class="btn-color btn-color-blue"></button>
+                        <button type="button" class="btn-color btn-color-black" @click="cambiarColor(figuraObjeto.id, 34, 34, 34, 255, 'fill')"></button>
+                        <button type="button" class="btn-color btn-color-white" @click="cambiarColor(figuraObjeto.id, 255, 255, 255, 255, 'fill')"></button>
+                        <button type="button" class="btn-color btn-color-yellow" @click="cambiarColor(figuraObjeto.id, 255, 217, 119, 255, 'fill')"></button>
+                        <button type="button" class="btn-color btn-color-red" @click="cambiarColor(figuraObjeto.id, 255, 175, 175, 255, 'fill')"></button>
+                        <button type="button" class="btn-color btn-color-green" @click="cambiarColor(figuraObjeto.id, 147, 255, 198, 255, 'fill')"></button>
+                        <button type="button" class="btn-color btn-color-blue" @click="cambiarColor(figuraObjeto.id, 176, 194, 242, 255, 'fill')"></button>
                     </div>
                     <!-- INPUTS -->
                     <div class="row justify-content-center px-2 m-0">
@@ -185,21 +163,21 @@
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">R:</label>
-                                <input type="text" name="" id="fill_r" class="ms-2" v-model="figuras[figuraID].fill_r">
+                                <input type="number" name="" id="fill_r" class="ms-2" min="0" max="255" v-model="figuraObjeto.fill_r">
                             </div>
                         </div>
                         <!-- INPUT "G" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">G:</label>
-                                <input type="text" name="" id="fill_g" class="ms-2" v-model="figuras[figuraID].fill_g">
+                                <input type="number" name="" id="fill_g" class="ms-2" min="0" max="255" v-model="figuraObjeto.fill_g">
                             </div>
                         </div>
                         <!-- INPUT "B" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">B:</label>
-                                <input type="text" name="" id="fill_b" class="ms-2" v-model="figuras[figuraID].fill_b">
+                                <input type="number" name="" id="fill_b" class="ms-2" min="0" max="255" v-model="figuraObjeto.fill_b">
                             </div>
                         </div>
                         <!-- INPUT "OPACITY" -->
@@ -208,7 +186,7 @@
                                 <label for="" class="d-flex align-items-center">
                                     <img src="{{asset('images/icono-opacidad.png')}}" alt="">:
                                 </label>
-                                <input type="text" name="" id="fill_a" class="ms-2" v-model="figuras[figuraID].fill_a">
+                                <input type="number" name="" id="fill_a" class="ms-2" min="0" max="255" v-model="figuraObjeto.fill_a">
                             </div>
                         </div>
                     </div><!-- end row -->
@@ -224,12 +202,12 @@
                     </div>
                     <!-- BUTTONS COLORS -->
                     <div class="d-flex justify-content-between px-3 mb-3">
-                        <button type="button" class="btn-color btn-color-black"></button>
-                        <button type="button" class="btn-color btn-color-white"></button>
-                        <button type="button" class="btn-color btn-color-yellow"></button>
-                        <button type="button" class="btn-color btn-color-red"></button>
-                        <button type="button" class="btn-color btn-color-green"></button>
-                        <button type="button" class="btn-color btn-color-blue"></button>
+                        <button type="button" class="btn-color btn-color-black" @click="cambiarColor(figuraObjeto.id, 34, 34, 34, 255, 'border')"></button>
+                        <button type="button" class="btn-color btn-color-white" @click="cambiarColor(figuraObjeto.id, 255, 255, 255, 255, 'border')"></button>
+                        <button type="button" class="btn-color btn-color-yellow" @click="cambiarColor(figuraObjeto.id, 255, 217, 119, 255, 'border')"></button>
+                        <button type="button" class="btn-color btn-color-red" @click="cambiarColor(figuraObjeto.id, 255, 175, 175, 255, 'border')"></button>
+                        <button type="button" class="btn-color btn-color-green" @click="cambiarColor(figuraObjeto.id, 147, 255, 198, 255, 'border')"></button>
+                        <button type="button" class="btn-color btn-color-blue" @click="cambiarColor(figuraObjeto.id, 176, 194, 242, 255, 'border')"></button>
                     </div>
                     <!-- INPUTS -->
                     <div class="row justify-content-center px-2 m-0">
@@ -237,21 +215,21 @@
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">R:</label>
-                                <input type="text" name="" id="border_r" class="ms-2" v-model="figuras[figuraID].border_r">
+                                <input type="number" name="" id="border_r" class="ms-2" min="0" max="255" v-model="figuraObjeto.border_r">
                             </div>
                         </div>
                         <!-- INPUT "G" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">G:</label>
-                                <input type="text" name="" id="border_g" class="ms-2" v-model="figuras[figuraID].border_g">
+                                <input type="number" name="" id="border_g" class="ms-2" min="0" max="255" v-model="figuraObjeto.border_g">
                             </div>
                         </div>
                         <!-- INPUT "B" -->
                         <div class="col-6 mb-2">
                             <div class="d-flex justify-content-end">
                                 <label for="">B:</label>
-                                <input type="text" name="" id="border_b" class="ms-2" v-model="figuras[figuraID].border_b">
+                                <input type="number" name="" id="border_b" class="ms-2" min="0" max="255" v-model="figuraObjeto.border_b">
                             </div>
                         </div>
                         <!-- INPUT "OPACITY" -->
@@ -260,14 +238,14 @@
                                 <label for="" class="d-flex align-items-center">
                                     <img src="{{asset('images/icono-opacidad.png')}}" alt="">:
                                 </label>
-                                <input type="text" name="" id="border_a" class="ms-2" v-model="figuras[figuraID].border_a">
+                                <input type="number" name="" id="border_a" class="ms-2" min="0" max="255"  v-model="figuraObjeto.border_a">
                             </div>
                         </div>
                         <!-- INPUT "THICKNESS" -->
                         <div class="col-12 mb-2">
                             <div class="d-flex justify-content-center">
                                 <label for="">Grosor:</label>
-                                <input type="text" name="" id="thickness" class="ms-2" v-model="figuras[figuraID].thickness">
+                                <input type="number" name="" id="thickness" class="ms-2" min="0" max="255" v-model="figuraObjeto.thickness">
                             </div>
                         </div>
                     </div><!-- end row -->
@@ -284,15 +262,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js" integrity="sha512-3RlxD1bW34eFKPwj9gUXEWtdSMC59QqIqHnD8O/NoTwSJhgxRizdcFVQhUMFyTp5RwLTDL0Lbcqtl8b7bFAzog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <script>
-        const { createApp } = Vue
-      
-        createApp({
+        const app = Vue.createApp({
             data() {
                 return {
                     figuras: [],
                     figuraSeleccionada: false,
                     figuraID: null,
-                    cuantasHay: 0,
+                    figuraObjeto: null,
                 }
             },
             methods: {
@@ -305,7 +281,93 @@
                 guardar() {
                     document.getElementById("inputData").value = JSON.stringify(this.figuras);
                 },
+                ocultarFigura(id) {
+                    const index = this.figuras.findIndex(figura => figura.id === id);
+                    if(this.figuras[index].hidden==false) {
+                        this.figuras[index].hidden = true;
+                    } else {
+                        this.figuras[index].hidden = false;
+                    }
+                    console.log("ESTADO NUEVO: "+this.figuras[index].hidden);
+                },
+                eliminarFigura(id) {
+                    /* 
+                        ME QUEDE AQUI CREANDO LA FUNCIÓN DE ELIMINAR UNA FIGURA
+                    */
+                    //const index = this.figuras.findIndex(figura => figura.id !== id);
+                    /* const index = this.figuras.findIndex(figura => figura.id === id);
+
+                    
+                    if(this.figuraID===id) {
+                        this.resetearVariables();
+                    } */
+                    this.resetearVariables();
+                    const nuevoArray = this.figuras.filter(figura => figura.id !== id);
+                    /* if(this.figuraID===id) {
+                        this.figuraID = null;
+                        this.figuraSeleccionada = false;
+                        this.figuraObjeto = {
+                            x: 0,
+                            y: 0,
+                            w: 0,
+                            h: 0,
+                            corner: 0,
+                            //RELLENO
+                            fill_r: 0,
+                            fill_g: 0,
+                            fill_b: 0,
+                            fill_a: 0,
+                            //BORDE
+                            thickness: 0,
+                            border_r: 0,
+                            border_g: 0,
+                            border_b: 0,
+                            border_a: 0,
+                        }
+                        console.log("HOLA ENTRA A ESTO");
+                    } */
+                    if(nuevoArray.length==0) {
+                        console.log("NO HAY NADA EN EL ARREGLO");
+                        this.figuras = [];
+                        this.resetearVariables();
+                    } else {
+                        console.log("NUEVO ARRAY: "+nuevoArray);
+                        this.figuras = nuevoArray;
+                        console.log("FIGURAS UPDATE: "+this.figuras);
+                        //this.resetearVariables();
+                    }
+                },
+                resetearVariables() {
+                    this.figuraID = null;
+                    this.figuraSeleccionada = false;
+                    this.figuraObjeto = null;/* {
+                        x: 0,
+                        y: 0,
+                        w: 0,
+                        h: 0,
+                        corner: 0,
+                        //RELLENO
+                        fill_r: 0,
+                        fill_g: 0,
+                        fill_b: 0,
+                        fill_a: 0,
+                        //BORDE
+                        thickness: 0,
+                        border_r: 0,
+                        border_g: 0,
+                        border_b: 0,
+                        border_a: 0,
+                    } */
+                },
+                cambiarColor(id, r, g, b, a, option) {
+                    const index = this.figuras.findIndex(figura => figura.id === id);
+                    console.log("***********************")
+                    console.log(index);
+                    console.log(this.figuras[index]);
+                    this.figuras[index].cambiarColorPredeterminado(r, g, b, a, option);
+                }
             },
+
             mounted() {
                 //FIGURA SEEDER
                 this.addFigure("rect");
@@ -328,12 +390,20 @@
 
                     p.draw = () => {
                         p.background(255);
-                        p.strokeWeight(8);
+                        /* p.strokeWeight(8);
                         p.stroke(0, 135, 255, 255);
                         p.fill(0, 83, 0, 255);
-                        p.rect(200, 50, 100, 100);
+                        p.rect(200, 50, 100, 100); */
                         this.figuras.forEach((element) => {
-                            element.dibujar(p);
+                            if(element.hidden==false) {
+                                if(element.selected==true) {
+                                    p.stroke(12, 140, 233);
+                                    p.strokeWeight(2);
+                                    p.fill(255);
+                                    p.rect(element.x-6, element.y-6, element.w+12, element.h+12);
+                                }
+                                element.dibujar(p);
+                            }
                         });
                     };
 
@@ -347,7 +417,9 @@
                         // Verifica si se hizo clic en alguna figura
                         this.figuras.forEach((figura, index) => {
                             console.log("ENTRA AL FOREACH");
-                            if(this.figuraSeleccionada==false) {
+                            console.log("Estas son las figuras:"+figura.id);
+                            console.log("SELECCIONADA? "+this.figuraSeleccionada);
+                            if(this.figuraSeleccionada==false&&figura.hidden==false) {
                                 console.log("ENTRA A: "+figura.type);
                                 if (p.mouseX >= figura.x &&
                                     p.mouseX <= figura.x + figura.w &&
@@ -357,178 +429,69 @@
                                     this.figuraSeleccionada = true; 
                                     figura.selected = true;
                                     console.log(figura);
-                                    this.cuantasHay++;
                                     this.figuraID = index;
+                                    this.figuraObjeto = figura;
+                                    console.log("~~~~~~~~~~~~~");
+                                    console.log(this.figuraID);
+                                    console.log("~~~~~~~~~~~~~");
                                 }
-
                             }
                             
                         });
-                        console.log("Selected: "+this.cuantasHay);
                         console.log("asd")
                     }
 
                     p.mousePressed = () => {
-                        console.log(this.figuraID);
-                        if (
-                            p.mouseX > this.figuras[this.figuraID].x &&
-                            p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
-                            p.mouseY > this.figuras[this.figuraID].y &&
-                            p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h 
-                        ) {
-                            if (this.figuraID !== null) {
-                                offsetX = p.mouseX - this.figuras[this.figuraID].x;
-                                offsetY = p.mouseY - this.figuras[this.figuraID].y;
+                        if(this.figuraID != null && this.figuras[this.figuraID] !== undefined) {
+                            console.log(this.figuraID);
+                            if (
+                                p.mouseX > this.figuras[this.figuraID].x &&
+                                p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
+                                p.mouseY > this.figuras[this.figuraID].y &&
+                                p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h 
+                            ) {
+                                if (this.figuraID !== null) {
+                                    offsetX = p.mouseX - this.figuras[this.figuraID].x;
+                                    offsetY = p.mouseY - this.figuras[this.figuraID].y;
+                                }
                             }
-                        } /* else {
-                            this.figuras[this.figuraID].selected = false;
-                            this.figuraSeleccionada = false;
-                        } */
-                        
+                        }
                     }
 
                     p.mouseDragged = () => {
-                        if (
-                            p.mouseX > this.figuras[this.figuraID].x &&
-                            p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
-                            p.mouseY > this.figuras[this.figuraID].y &&
-                            p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h 
-                        ) {
-                            if (this.figuraID !== null) {
-                                this.figuras[this.figuraID].x = p.mouseX - offsetX;
-                                this.figuras[this.figuraID].y = p.mouseY - offsetY;
+                        if(this.figuraID != null && this.figuras[this.figuraID] !== undefined) {
+                            if (
+                                p.mouseX > this.figuras[this.figuraID].x &&
+                                p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
+                                p.mouseY > this.figuras[this.figuraID].y &&
+                                p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h 
+                            ) {
+                                if (this.figuraID !== null && this.figuras[this.figuraID].hidden==false) {
+                                    this.figuras[this.figuraID].x = p.mouseX - offsetX;
+                                    this.figuras[this.figuraID].y = p.mouseY - offsetY;
+                                }
                             }
-                        } /* else {
-                            this.figuras[this.figuraID].selected = false;
-                            this.figuraSeleccionada = false;
-                        } */
-                        
+                        }    
                     }
                     p.mouseReleased = () => {
-                        if (
-                            !(p.mouseX > this.figuras[this.figuraID].x &&
-                            p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
-                            p.mouseY > this.figuras[this.figuraID].y &&
-                            p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h)
-                        ) {
-                            if (this.figuraID !== null) {
-                                this.figuras[this.figuraID].selected = false;
-                                this.figuraSeleccionada = false;
-                            }
-                        }
-
-                        
-                        /* this.figuras.forEach((figura) => {
+                        if(this.figuraID != null && this.figuras[this.figuraID] !== undefined) {
                             if (
-                                p.mouseX > figura.x - figura.w &&
-                                p.mouseX < figura.x + figura.w &&
-                                p.mouseY > figura.y - figura.w &&
-                                p.mouseY < figura.y + figura.w
+                                !(p.mouseX > this.figuras[this.figuraID].x &&
+                                p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
+                                p.mouseY > this.figuras[this.figuraID].y &&
+                                p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h)
                             ) {
-                                if (this.figuraID !== null) {
+                                if (this.figuraID !== null && (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height)) {
                                     this.figuras[this.figuraID].selected = false;
                                     this.figuraSeleccionada = false;
                                 }
                             }
-                            element.selected = false;
-                        }); */
-                        //this.figuraSeleccionada = false;
+                        }
                     }
                 }, "area-canvas");
             },
-        }).mount('#app')
-    </script>
-
-    <script>
-        /* FIGURAS Y ASIGNAR LOS VALORES EN INPUT DATA COMO JSON */
-        /* var figuras = [
-            {
-                "type": "text",
-                "x": 10,
-                "y": 20,
-                "w": 25,
-                "h": 20,
-            },
-            {
-                "type": "rect",
-                "x": 5,
-                "y": 5,
-                "w": 35,
-                "h": 20,
-            },
-        ];
-
-        console.log("Título:"+document.getElementById("title").value);
-
-        console.log("InputData Previo JSON:"+document.getElementById("inputData").value) */
-
-        //LÍNEAS PARA ASIGNAR EL VALOR AL INPUT (DESCOMENTAR PARA ASIGNAR Y GUARDAR DATOS DE PRUEBA)
-        //document.getElementById("inputData").value = JSON.stringify(figuras);
-        //console.log("InputData Posterior JSON:"+document.getElementById("inputData").value);
-
-        //----------------------------------------------------------------
-
-        /* OBTENER MEDIDAS DEL CANVAS EN BASE A LA PANTALLA */
-        /* let divCanvas = document.getElementById("area-canvas")
-        let canvasAncho = divCanvas.offsetWidth;
-        let canvasAlto = divCanvas.offsetHeight;
-        console.log("ANCHO DEL CANVAS: "+canvasAncho);
-        console.log("ALTO DEL CANVAS: "+canvasAlto); */
-        
-        /* console.log("Hola");
-        let figuras = [];
-
-        function setup() {
-            var divCanvas = document.getElementById("area-canvas")
-            var canvasAncho = divCanvas.offsetWidth;
-            var canvasAlto = divCanvas.offsetHeight;
-            var canvas = createCanvas(canvasAncho, canvasAlto);
-            canvas.parent(divCanvas);
-        }
-
-        function draw() {
-            //background(255, 255, 255);
-            background(255);
-
-            //rect(200, 50, 100, 100);
-            figuras.forEach(element => {
-                element.dibujar();
-                //pintarlo(element);
-                console.log(element);
-
-            });
-            console.log("-------------------");
-            
-        }
-
-        function addFigure(tipoFigura) {
-            figuras.push(new Figura(tipoFigura));
-            //let equisde = new Figura('rect');
-            //console.log(equisde);
-            console.log(figuras);
-        }
-
-        //ESTO SIRVE - NO ELIMINAR
-        function guardar() {
-            document.getElementById("inputData").value = JSON.stringify(figuras);
-        } */
-
-        //PRUEBAS
-        /* function pintarlo(objeto) {
-            if (objeto.type == 'rect') {
-                //BORDE GROSOR
-                strokeWeight(objeto.thickness);
-                console.log("Grosor:"+objeto.thickness)
-                //BORDE COLOR Y OPACIDAD
-                stroke(objeto.border_r, objeto.border_g, objeto.border_b, objeto.border_a);
-                //RELLENO COLOR Y OPACIDAD
-                fill(objeto.fill_r, objeto.fill_g, objeto.fill_b, objeto.fill_a);
-                //DIBUJAR RECTÁNGULO Y ESQUINAS REDONDEADAS
-                rect(objeto.x, objeto.y, objeto.w, objeto.h, objeto.corner);
-            }
-        } */
-
-
+        })
+        app.mount('#app')
     </script>
 </body>
 </html>

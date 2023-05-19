@@ -20,6 +20,7 @@
     --add-btn-color: #0FA958;
     --remove-btn-color: #FF5364;
     --hover-btn-color: #94989C;
+    --alternative-color: #99989C;
 
     --google-color: #DF4930;
     --facebook-color: #507CC0;
@@ -60,6 +61,8 @@ button,input {
 
 .bgcolor-add-btn { background-color: var(--add-btn-color) !important; }
 .bgcolor-remove-btn { background-color: var(--remove-btn-color) !important; }
+.bgcolor-hover-btn { background-color: var(--hover-btn-color) !important; }
+.bgcolor-alternative { background-color: var(--alternative-color) !important; }
 
 .bgcolor-google { background-color: var(--google-color) !important; }
 .bgcolor-facebook { background-color: var(--facebook-color) !important; }
