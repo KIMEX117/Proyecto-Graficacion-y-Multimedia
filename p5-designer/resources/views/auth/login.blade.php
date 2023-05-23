@@ -25,7 +25,7 @@
                         </h1>
                         <div class="d-flex flex-column mb-3">
                             <label for="email" class="mb-1">Correo electrónico:</label>
-                            <input type="email" type="email" name="email" value="{{old('email')}}" placeholder="micorreo@gmail.com">
+                            <input type="email" type="email" name="email" value="{{old('email')}}" placeholder="micorreo@mail.com">
                             @error('email')
                                 <div>
                                     {{$message}}

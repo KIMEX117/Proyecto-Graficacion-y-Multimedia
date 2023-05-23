@@ -766,6 +766,10 @@ footer .footerContactanos {
     font-size: 24px;
     font-weight: 700;
 }
+.sidebar-elements h3 {
+    font-size: 12px;
+    font-weight: 500;
+}
 .sidebar-elements .icon-figure {
     width: 16px;
     height: 16px;
@@ -780,7 +784,14 @@ footer .footerContactanos {
     color: var(--white-color);
 }
 .sidebar-elements .btns-figure button:hover {
-    background-color: var(--hover-btn-color);
+    background-color: #748393;
+}
+.list-of-elements {
+    height: 80vh;
+    min-height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /*~~~~~~~~~~~~~~~~~~~*/
@@ -825,6 +836,9 @@ footer .footerContactanos {
 .sidebar-options img {
     max-width: 22px;
     min-width: 22px;
+}
+.sidebar-options input#text {
+    max-width: 150px;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~*/
