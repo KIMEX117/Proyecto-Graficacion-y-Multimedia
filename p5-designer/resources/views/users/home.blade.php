@@ -84,7 +84,7 @@
                                     <!-- CARD DESIGN -->
                                     <div class="card-design mb-4 p-2">
                                         <a href="{{url('/design/'.$design->id.'/edit')}}" class="text-white">
-                                            <img src="{{asset('images/diseño-preview.png')}}" class="mb-3" alt="">
+                                            <img src="{{ $design->image }}" class="mb-3" alt="">
                                             <div class="d-flex flex-column">
                                                 <h1 class="mb-2">
                                                     {{$design->title}}
@@ -92,7 +92,6 @@
                                                 <h2 class="d-flex align-items-center mb-3">
                                                     Editado: <span class="ms-1">{{$design->updated_at}}</span>
                                                 </h2>
-                                                
                                             </div>
                                         </a>
                                         <div class="d-flex justify-content-center mb-2">
@@ -122,9 +121,6 @@
 
             </div><!-- end list of designs -->
         </div><!-- end user designs -->
-        @if (isset($designs))
-        {{ $designs }} {{-- YA TRAE LOS DISEÑOS FILTRADOS POR ID  --}}
-        @endif
 
     </div><!-- end main content -->
     

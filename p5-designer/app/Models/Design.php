@@ -16,6 +16,7 @@ class Design extends Model
         'user_id',
         'title',
         'data',
+        'image',
     ];
 
     /**

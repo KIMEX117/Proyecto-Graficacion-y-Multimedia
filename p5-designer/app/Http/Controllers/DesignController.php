@@ -13,28 +13,7 @@ class DesignController extends Controller
      */
     public function index()
     {
-        /* $input = [
-            'user_id' => 2,
-            'title' => 'Demo Title',
-            'data' => [
-                '1' => 'One',
-                '2' => 'Two',
-                '3' => 'Three'
-            ],
-        ];
-  
-        $design = Design::create($input);
-  
-        dd($design->data); */
-
-        //SIRVE PERO LO COMENTE POR MIENTRAS PORQUE TRAE TODOS LOS REGISTROS SIN FILTRAR POR USUARIO
-        //$designs = Design::all();
-
         $designs = Design::where('user_id', auth()->id())->get();
-
-        //SIRVE PERO LO COMENTE PARA PROBAR CON LA VISTA HOME
-        /* return view('designs.index', compact('designs')); */
-
         return view('users.home', compact('designs'));
     }
 
@@ -51,18 +30,9 @@ class DesignController extends Controller
      */
     public function store(Request $request)
     {
-        echo $request->user_id;
-        echo $request->title;
-        echo $request->data;
-        $prueba = json_decode($request->data);
-        echo "asdasdasdasdasd\ndasdasd";
-        var_dump($prueba);
-
         $design = Design::create($request->all());
         $design->save();
-
         $id = $design->id;
-        //echo "Nuevo ID: ".$nuevo_id;
         return redirect()->route('design.edit', ['id' => $id]);
     }
 

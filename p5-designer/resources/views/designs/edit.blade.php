@@ -5,11 +5,12 @@
     <title>Proyecto - P5 Designer</title>
 </head>
 <body class="user-project" id="app">
-    <form id="project-form" action="{{ url('/design/'.$design->id) }}" method="POST" class="d-flex flex-column h-100" @keydown.enter="preventFormSubmit">
+    <form id="project-form" action="{{ url('/design/'.$design->id) }}" method="POST" class="d-flex flex-column h-100" @keydown.enter="preventFormSubmit" enctype="multipart/form-data">
         @csrf
         @method('put')
         <input type="text" id="user_id" name="user_id" value="{{auth()->id()}}" hidden>
         <input type="text" id="inputData" name="data" hidden>
+        <input type="hidden" id="imageInput" name="image">
         <!-- TOOLBAR -->
         <div class="header-toolbar ps-2">
             <!-- FIGURES BAR -->
@@ -365,6 +366,9 @@
                 },
                 guardar() {
                     document.getElementById("inputData").value = JSON.stringify(this.figuras);
+                    let p5canvas = document.getElementById("defaultCanvas0");
+                    let image = p5canvas.toDataURL('image/png');
+                    document.getElementById("imageInput").value = image;
                     document.getElementById("project-form").submit();
                 },
                 ocultarFigura(id) {
