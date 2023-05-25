@@ -63,9 +63,9 @@
                     <!-- ROW -->
                     <div class="row">
                         <!-- COLUMN -->
-                        <div v-for="(figura, index) in figuras" :class="figura.selected ? 'bgcolor-hover-btn' : ''" class="col-12" @click="seleccionarFigura(index)">
+                        <div v-for="(figura, index) in figuras" :class="figura.selected ? 'bgcolor-hover-btn' : ''" class="col-12">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center w-100" @click="seleccionarFigura(index)">
                                     <i :class="asignarIconoFigura(figura.type)" class="fa-solid icon-figure" :key="'iconoFigura'+index" :style="{ color: obtenerColorRGB(figura.fill_r, figura.fill_g, figura.fill_b) }"></i>
                                     <h3 class="name-figure ms-2 mb-0">
                                         @{{figura.type}} - @{{figura.id}}
@@ -359,6 +359,8 @@
                     this.tipoFigura = tipoFigura;
                     if(tipoFigura==='line') {
                         this.dibujando = true;
+                    } else {
+                        this.dibujando = false;
                     }
                 },
                 addFigure(tipoFigura, x = 100, y = 100) {
@@ -421,6 +423,12 @@
                         }
                         this.figuras[index] = this.figuras[index+1];
                         this.figuras[index+1] = aux;
+                        this.resetearVariables();
+                        this.figuras[index].selected = false;
+                        this.figuras[index+1].selected = true;
+                        this.figuraSeleccionada = true; 
+                        this.figuraID = index+1;
+                        this.figuraObjeto = this.figuras[index+1];
                     } else if(posicion==="anterior") {
                         if (index <= 0 || index > this.figuras.length) {
                             console.error("FUERA DE RANGO - Anterior");
@@ -428,6 +436,12 @@
                         }
                         this.figuras[index] = this.figuras[index-1];
                         this.figuras[index-1] = aux;
+                        this.resetearVariables();
+                        this.figuras[index].selected = false;
+                        this.figuras[index-1].selected = true;
+                        this.figuraSeleccionada = true; 
+                        this.figuraID = index-1;
+                        this.figuraObjeto = this.figuras[index-1];
                     }
                 },
                 obtenerColorRGB(r, g, b) {

@@ -13,14 +13,14 @@ class Figura {
             this.corner = 0;
             /* RELLENO */
             this.fill_r = 255;
-            this.fill_g = 88;
+            this.fill_g = 255;
             this.fill_b = 255;
             this.fill_a = 255;
             /* BORDE */
-            this.thickness = 5;
-            this.border_r = 45;
-            this.border_g = 145;
-            this.border_b = 45;
+            this.thickness = 2;
+            this.border_r = 0;
+            this.border_g = 0;
+            this.border_b = 0;
             this.border_a = 255;
             /* FONT */
             this.size = null;
@@ -32,9 +32,9 @@ class Figura {
             this.y2 = 100;
             this.thickness = 2;
             /* RELLENO */
-            this.fill_r = 255;
-            this.fill_g = 88;
-            this.fill_b = 255;
+            this.fill_r = 0;
+            this.fill_g = 0;
+            this.fill_b = 0;
             this.fill_a = 255;
             /* FONT */
             this.size = null;
@@ -47,14 +47,14 @@ class Figura {
             this.corner = null;
             /* RELLENO */
             this.fill_r = 255;
-            this.fill_g = 88;
+            this.fill_g = 255;
             this.fill_b = 255;
             this.fill_a = 255;
             /* BORDE */
-            this.thickness = 5;
-            this.border_r = 45;
-            this.border_g = 145;
-            this.border_b = 45;
+            this.thickness = 2;
+            this.border_r = 0;
+            this.border_g = 0;
+            this.border_b = 0;
             this.border_a = 255;
             /* FONT */
             this.size = null;

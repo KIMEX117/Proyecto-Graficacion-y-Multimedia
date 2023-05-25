@@ -95,10 +95,10 @@
                                             </div>
                                         </a>
                                         <div class="d-flex justify-content-center mb-2">
-                                            <form id="formDestroy" action="{{route('design.delete', $design->id)}}" method="POST">
+                                            <form id="formDestroy{{$design->id}}" action="{{route('design.delete', $design->id)}}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <input type="text" name="id" value="{{$design->id}}" hidden>
+                                                <input type="text" name="id{{$design->id}}" value="{{$design->id}}" hidden>
                                             </form>
                                             <button type="button" onclick="destroy({{$design->id}})"  class="main-btn remove-btn px-3">
                                                 ELIMINAR
@@ -141,7 +141,7 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById("formDestroy").submit();
+                    document.getElementById("formDestroy" + id).submit();
                 }
             })
         }
