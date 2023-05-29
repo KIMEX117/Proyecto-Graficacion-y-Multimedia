@@ -690,9 +690,9 @@ footer .footerContactanos {
 /*    FIGURES BAR    */
 /*~~~~~~~~~~~~~~~~~~~*/
 .header-toolbar .figures-bar {
-    width: 328px;
-    max-width: 328px;
-    min-width: 328px;
+    width: 280px;
+    max-width: 280px;
+    min-width: 280px;
 }
 .header-toolbar .figures-bar a img {
     width: 40px;
@@ -702,14 +702,23 @@ footer .footerContactanos {
 .header-toolbar .figures-bar button {
     background-color: var(--secondary-color);
     border-radius: 3px;
+    width: 40px;
+    max-width: 40px;
+    min-width: 40px;
+    height: 40px;
+    max-height: 40px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .header-toolbar .figures-bar button:hover {
     background-color: var(--tertiary-color);
 }
 .header-toolbar .figures-bar button img {
-    width: 32px;
-    max-width: 32px;
-    min-width: 32px;
+    width: 28px;
+    max-width: 28px;
+    min-width: 28px;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~*/

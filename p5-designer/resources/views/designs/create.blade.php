@@ -4,8 +4,9 @@
     @include('layouts.head')
     <title>Proyecto - P5 Designer</title>
 </head>
-<body class="user-project" id="app">
-    <form id="project-form" action="{{ route('design.store') }}" method="POST" class="d-flex flex-column h-100" @keydown.enter="preventFormSubmit" enctype="multipart/form-data">
+<body>
+    <div class="user-project" id="app">
+        <form id="project-form" action="{{ route('design.store') }}" method="POST" class="d-flex flex-column h-100" @keydown.enter="preventFormSubmit" enctype="multipart/form-data">
         @csrf
         <input type="text" id="user_id" name="user_id" value="{{auth()->id()}}" hidden>
         <input type="text" id="inputData" name="data" hidden>
@@ -18,19 +19,19 @@
                     <img src="{{asset('images/logo-blanco.png')}}" alt="">
                 </a>
                 <div class="d-flex">
-                    <button type="button" @click="cursorNormal()" class="mx-1">
+                    <button type="button" id="buttonCursor" @click="cursorNormal()" :class="(dibujar==false) ? 'bgcolor-tertiary' : ''" class="mx-1">
                         <img src="{{asset('images/icono-cursor.png')}}" alt="">
                     </button>
-                    <button type="button" @click="dibujarFigura('rect')" class="mx-1">
+                    <button type="button" id="buttonRect" @click="dibujarFigura('rect')" :class="(dibujar==true&&tipoFigura==='rect') ? 'bgcolor-tertiary' : ''" class="mx-1">
                         <img src="{{asset('images/icono-cuadrado.png')}}" alt="">
                     </button>
-                    <button type="button" @click="dibujarFigura('line')" class="mx-1">
+                    <button type="button" id="buttonLine" @click="dibujarFigura('line')" :class="(dibujar==true&&tipoFigura==='line') ? 'bgcolor-tertiary' : ''" class="mx-1">
                         <img src="{{asset('images/icono-linea-diagonal.png')}}" alt="">
                     </button>
-                    <button type="button" @click="dibujarFigura('ellipse')" class="mx-1">
+                    <button type="button" id="buttonEllipse" @click="dibujarFigura('ellipse')" :class="(dibujar==true&&tipoFigura==='ellipse') ? 'bgcolor-tertiary' : ''" class="mx-1">
                         <img src="{{asset('images/icono-circulo.png')}}" alt="">
                     </button>
-                    <button type="button" @click="dibujarFigura('text')" class="mx-1">
+                    <button type="button" id="buttonText" @click="dibujarFigura('text')" :class="(dibujar==true&&tipoFigura==='text') ? 'bgcolor-tertiary' : ''" class="mx-1">
                         <img src="{{asset('images/icono-texto.png')}}" alt="">
                     </button>
                 </div>
@@ -133,7 +134,7 @@
                         <div v-if="figuraObjeto.type!='text'" class="col-6 mb-2">
                             <div v-if="figuraObjeto.type!=='line'" class="d-flex justify-content-end">
                                 <label for="">W:</label>
-                                <input  type="number" name="" id="w" class="ms-2" min="0" v-model="figuraObjeto.w">
+                                <input  type="number" name="" id="w" class="ms-2" v-model="figuraObjeto.w">
                             </div>
                             <div v-else class="d-flex justify-content-end">
                                 <label for="">X2:</label>
@@ -144,7 +145,7 @@
                         <div v-if="figuraObjeto.type!='text'" class="col-6 mb-2">
                             <div v-if="figuraObjeto.type!=='line'" class="d-flex justify-content-end">
                                 <label for="">H:</label>
-                                <input  type="number" name="" id="h" class="ms-2" min="0" v-model="figuraObjeto.h">
+                                <input  type="number" name="" id="h" class="ms-2" v-model="figuraObjeto.h">
                             </div>
                             <div v-else class="d-flex justify-content-end">
                                 <label for="">Y2:</label>
@@ -303,6 +304,8 @@
         </div><!-- end project -->
 
     </form><!-- end form -->
+    </div>
+    
     
 
     @include('layouts.scripts')
@@ -319,7 +322,6 @@
                     figuraObjeto: null,
                     dibujar: false,
                     tipoFigura: '',
-                    dibujando: false,
                     puntoInicio: [],
                     puntoFinal: [],
                 }
@@ -331,19 +333,15 @@
                 cursorNormal() {
                     this.dibujar = false;
                     this.tipoFigura = '';
-                    this.dibujando = false;
                     this.puntoInicio = [];
                     this.puntoFinal = [];
+                    document.body.style.cursor = "default";
                 },
                 dibujarFigura(tipoFigura) {
                     this.resetearVariables();
                     this.dibujar = true;
                     this.tipoFigura = tipoFigura;
-                    if(tipoFigura==='line') {
-                        this.dibujando = true;
-                    } else {
-                        this.dibujando = false;
-                    }
+                    document.body.style.cursor = "crosshair";
                 },
                 addFigure(tipoFigura, x = 100, y = 100) {
                     this.figuras.unshift(new Figura(tipoFigura, x, y));
@@ -444,18 +442,6 @@
                 }
             },
             mounted() {
-                //FIGURA SEEDER
-                /* this.addFigure("rect");
-                this.figuras[0].x = 300;
-                this.figuras[0].y = 300;
-                this.addFigure("text");
-                this.figuras[0].x = 200;
-                this.figuras[0].y = 200;
-                this.addFigure("ellipse");
-                this.figuras[0].x = 150;
-                this.figuras[0].y = 250;
-                console.log(this.figuras); */
-
                 //CANVAS
                 new p5((p) => {
                     let offsetX = 0;
@@ -490,16 +476,16 @@
                                         rectWidth = Math.abs(this.figuras[i].x2 - this.figuras[i].x1);
                                         rectHeight = Math.abs(this.figuras[i].y2 - this.figuras[i].y1);                   
                                         p.rect(rectX, rectY, rectWidth, rectHeight);
-                                        /* let angle = p.atan2(this.figuras[i].y2 - this.figuras[i].y1, this.figuras[i].x2 - this.figuras[i].x1);
-                                        let degrees = p.degrees(angle);
-                                        p.push();
-                                        p.translate(this.figuras[i].x1, this.figuras[i].y1);
-                                        p.rotate(angle);
-                                        p.rect(0, (-this.figuras[i].thickness / 2)-5, p.dist(this.figuras[i].x1, this.figuras[i].y1, this.figuras[i].x2, this.figuras[i].y2), this.figuras[i].thickness+10);
-                                        p.pop();
-                                        console.log("Ángulo: " + degrees.toFixed(2)); */
                                     } else {
-                                        p.rect(this.figuras[i].x-6, this.figuras[i].y-6, this.figuras[i].w+12, this.figuras[i].h+12);
+                                        if(this.figuras[i].w>=0&&this.figuras[i].h>=0) {
+                                            p.rect(this.figuras[i].x-6, this.figuras[i].y-6, this.figuras[i].w+12, this.figuras[i].h+12);
+                                        } else if(this.figuras[i].w<0&&this.figuras[i].h>=0) {
+                                            p.rect(this.figuras[i].x+6, this.figuras[i].y-6, this.figuras[i].w-12, this.figuras[i].h+12);
+                                        } else if(this.figuras[i].w>=0&&this.figuras[i].h<0) {
+                                            p.rect(this.figuras[i].x-6, this.figuras[i].y+6, this.figuras[i].w+12, this.figuras[i].h-12);
+                                        } else if(this.figuras[i].w<0&&this.figuras[i].h<0) {
+                                            p.rect(this.figuras[i].x+6, this.figuras[i].y+6, this.figuras[i].w-12, this.figuras[i].h-12);
+                                        }
                                     }
                                 }
                                 this.figuras[i].dibujar(p);
@@ -507,45 +493,50 @@
                         }
 
                         if(this.dibujar==true){
-                            if(this.dibujando==false) {
+                            if(this.puntoInicio!=null) {
                                 p.stroke(0);
-                                p.fill(255);
+                                p.fill(255,255,255,0);
                                 p.strokeWeight(2);
                                 if(this.tipoFigura==='rect') {
-                                    p.rect(p.mouseX, p.mouseY, 100, 50);
-                                } else if(this.tipoFigura==='ellipse') {
-                                    p.ellipse(p.mouseX+25, p.mouseY+25, 50, 50);
-                                } else if(this.tipoFigura==='text') {
-                                    p.stroke(255);
-                                    p.fill(0);
-                                    p.strokeWeight(1);
-                                    p.text("TEXTO", p.mouseX, p.mouseY);
-                                }
-                            } else if(this.dibujando) {
-                                p.stroke(2);
-                                p.strokeWeight(3);
-                                p.fill(2);
-                                p.circle(p.mouseX, p.mouseY, 10);
-                                if(this.puntoInicio!=null) {
+                                    p.rect(this.puntoInicio.x, this.puntoInicio.y, p.mouseX-this.puntoInicio.x, p.mouseY-this.puntoInicio.y);
+                                } else if(this.tipoFigura==='line') {
                                     p.line(this.puntoInicio.x, this.puntoInicio.y, p.mouseX, p.mouseY);
+                                } else if(this.tipoFigura==='ellipse') {
+                                    p.ellipse(this.puntoInicio.x+((p.mouseX-this.puntoInicio.x)/2), this.puntoInicio.y+((p.mouseY-this.puntoInicio.y)/2), (p.mouseX-this.puntoInicio.x), (p.mouseY-this.puntoInicio.y));
                                 }
                             }
                         }
                     };
 
-                    p.mouseClicked = () => {                      
+                    p.mouseClicked = () => {              
                         if(this.dibujar==false) {
                             this.figuras.forEach((figura, index) => {
                                 if(this.figuraSeleccionada==false&&figura.hidden==false) {
-                                    if (p.mouseX >= figura.x &&
-                                        p.mouseX <= figura.x + figura.w &&
-                                        p.mouseY >= figura.y &&
-                                        p.mouseY <= figura.y + figura.h &&
-                                        figura.type!=='text' ) {
-                                        this.figuraSeleccionada = true; 
-                                        figura.selected = true;
-                                        this.figuraID = index;
-                                        this.figuraObjeto = figura;
+                                    if (figura.type!=='text'&&figura.type!=='line') {
+                                        let entra = false;
+                                        if(figura.w>=0&&figura.h>=0) {
+                                            if(p.mouseX >= figura.x && p.mouseX <= figura.x + figura.w && p.mouseY >= figura.y && p.mouseY <= figura.y + figura.h) {
+                                                entra = true;
+                                            }
+                                        } else if(figura.w<0&&figura.h>=0) {
+                                            if(p.mouseX <= figura.x && p.mouseX >= figura.x + figura.w && p.mouseY >= figura.y && p.mouseY <= figura.y + figura.h) {
+                                                entra = true;
+                                            }
+                                        } else if(figura.w>=0&&figura.h<0) {
+                                            if(p.mouseX >= figura.x && p.mouseX <= figura.x + figura.w && p.mouseY <= figura.y && p.mouseY >= figura.y + figura.h) {
+                                                entra = true;
+                                            }
+                                        } else if(figura.w<0&&figura.h<0) {
+                                            if(p.mouseX <= figura.x && p.mouseX >= figura.x + figura.w && p.mouseY <= figura.y && p.mouseY >= figura.y + figura.h) {
+                                                entra = true;
+                                            }
+                                        }
+                                        if(entra) {
+                                            this.figuraSeleccionada = true; 
+                                            figura.selected = true;
+                                            this.figuraID = index;
+                                            this.figuraObjeto = figura;
+                                        }
                                     } else if(p.mouseX >= figura.x  &&
                                         p.mouseX <= figura.x + figura.w &&
                                         p.mouseY >= figura.y - figura.h &&
@@ -574,11 +565,9 @@
 
                     p.mousePressed = () => {
                         if(this.dibujar && (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height)) {
-                            if(this.tipoFigura!=='line'&&this.tipoFigura!=='') {
+                            if(this.tipoFigura==='text'&&this.tipoFigura!=='') {
                                 this.addFigure(this.tipoFigura, p.mouseX, p.mouseY);
-                            }
-
-                            if(this.tipoFigura==='line'&&this.dibujando==true) {
+                            } else {
                                 if(this.puntoInicio.length==0) {
                                     this.puntoInicio = {
                                         x: p.mouseX,
@@ -590,25 +579,38 @@
                                         y: p.mouseY,
                                     }
                                     this.addFigure(this.tipoFigura);
-                                    this.figuras[0].x1 = this.puntoInicio.x;
-                                    this.figuras[0].y1 = this.puntoInicio.y;
-                                    this.figuras[0].x2 = this.puntoFinal.x;
-                                    this.figuras[0].y2 = this.puntoFinal.y;
+                                    if(this.tipoFigura==='line') {
+                                        this.figuras[0].updateLinea(this.puntoInicio.x, this.puntoInicio.y, this.puntoFinal.x, this.puntoFinal.y);
+                                    } else {
+                                        this.figuras[0].updateMedidas(this.puntoInicio.x, this.puntoInicio.y, this.puntoFinal.x-this.puntoInicio.x, this.puntoFinal.y-this.puntoInicio.y);
+                                    }
                                     this.puntoInicio = [];
                                     this.puntoFinal = [];
                                 }
                             }
                         }
 
-                        if(this.figuraID != null && this.figuras[this.figuraID] !== undefined) {
-                            if (
-                                p.mouseX > this.figuras[this.figuraID].x &&
-                                p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
-                                p.mouseY > this.figuras[this.figuraID].y &&
-                                p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h &&
-                                this.figuras[this.figuraID].type!=='text'&&this.figuras[this.figuraID].type!=='line'
-                            ) {
-                                if (this.figuraID !== null) {
+                        if(this.figuraID !== null && this.figuras[this.figuraID] !== undefined) {
+                            if(this.figuras[this.figuraID].type!=='text'&&this.figuras[this.figuraID].type!=='line') {
+                                let entra = false;
+                                if(this.figuras[this.figuraID].w>=0&&this.figuras[this.figuraID].h>=0) {
+                                    if(p.mouseX >= this.figuras[this.figuraID].x && p.mouseX <= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY >= this.figuras[this.figuraID].y && p.mouseY <= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w<0&&this.figuras[this.figuraID].h>=0) {
+                                    if(p.mouseX <= this.figuras[this.figuraID].x && p.mouseX >= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY >= this.figuras[this.figuraID].y && p.mouseY <= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w>=0&&this.figuras[this.figuraID].h<0) {
+                                    if(p.mouseX >= this.figuras[this.figuraID].x && p.mouseX <= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY <= this.figuras[this.figuraID].y && p.mouseY >= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w<0&&this.figuras[this.figuraID].h<0) {
+                                    if(p.mouseX <= this.figuras[this.figuraID].x && p.mouseX >= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY <= this.figuras[this.figuraID].y && p.mouseY >= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                }
+                                if(entra) {
                                     offsetX = p.mouseX - this.figuras[this.figuraID].x;
                                     offsetY = p.mouseY - this.figuras[this.figuraID].y;
                                 }
@@ -638,15 +640,27 @@
                     }
 
                     p.mouseDragged = () => {
-                        if(this.figuraID != null && this.figuras[this.figuraID] !== undefined) {
-                            if (
-                                p.mouseX > this.figuras[this.figuraID].x &&
-                                p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
-                                p.mouseY > this.figuras[this.figuraID].y &&
-                                p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h &&
-                                this.figuras[this.figuraID].type!=='text'
-                            ) {
-                                if (this.figuraID !== null && this.figuras[this.figuraID].hidden==false) {
+                        if(this.figuraID !== null && this.figuras[this.figuraID] !== undefined) {
+                            if(this.figuras[this.figuraID].type!=='text'&&this.figuras[this.figuraID].type!=='line') {
+                                let entra = false;
+                                if(this.figuras[this.figuraID].w>=0&&this.figuras[this.figuraID].h>=0) {
+                                    if(p.mouseX >= this.figuras[this.figuraID].x && p.mouseX <= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY >= this.figuras[this.figuraID].y && p.mouseY <= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w<0&&this.figuras[this.figuraID].h>=0) {
+                                    if(p.mouseX <= this.figuras[this.figuraID].x && p.mouseX >= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY >= this.figuras[this.figuraID].y && p.mouseY <= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w>=0&&this.figuras[this.figuraID].h<0) {
+                                    if(p.mouseX >= this.figuras[this.figuraID].x && p.mouseX <= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY <= this.figuras[this.figuraID].y && p.mouseY >= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w<0&&this.figuras[this.figuraID].h<0) {
+                                    if(p.mouseX <= this.figuras[this.figuraID].x && p.mouseX >= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY <= this.figuras[this.figuraID].y && p.mouseY >= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                }
+                                if(entra==true && this.figuras[this.figuraID].hidden==false) {
                                     this.figuras[this.figuraID].x = p.mouseX - offsetX;
                                     this.figuras[this.figuraID].y = p.mouseY - offsetY;
                                 }
@@ -679,23 +693,35 @@
                     }
 
                     p.mouseReleased = () => {
-                        if(this.figuraID != null && this.figuras[this.figuraID] !== undefined) {
-                            if (
-                                !(p.mouseX > this.figuras[this.figuraID].x &&
-                                p.mouseX < this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
-                                p.mouseY > this.figuras[this.figuraID].y &&
-                                p.mouseY < this.figuras[this.figuraID].y + this.figuras[this.figuraID].h &&
-                                this.figuras[this.figuraID].type!=='text')
-                            ) {
-                                if (this.figuraID !== null && (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height)) {
+                        if(this.figuraID !== null && this.figuras[this.figuraID] !== undefined) {
+                            if(this.figuras[this.figuraID].type!=='text'&&this.figuras[this.figuraID].type!=='line') {
+                                let entra = false;
+                                if(this.figuras[this.figuraID].w>=0&&this.figuras[this.figuraID].h>=0) {
+                                    if(p.mouseX >= this.figuras[this.figuraID].x && p.mouseX <= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY >= this.figuras[this.figuraID].y && p.mouseY <= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w<0&&this.figuras[this.figuraID].h>=0) {
+                                    if(p.mouseX <= this.figuras[this.figuraID].x && p.mouseX >= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY >= this.figuras[this.figuraID].y && p.mouseY <= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w>=0&&this.figuras[this.figuraID].h<0) {
+                                    if(p.mouseX >= this.figuras[this.figuraID].x && p.mouseX <= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY <= this.figuras[this.figuraID].y && p.mouseY >= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                } else if(this.figuras[this.figuraID].w<0&&this.figuras[this.figuraID].h<0) {
+                                    if(p.mouseX <= this.figuras[this.figuraID].x && p.mouseX >= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w && p.mouseY <= this.figuras[this.figuraID].y && p.mouseY >= this.figuras[this.figuraID].y + this.figuras[this.figuraID].h) {
+                                        entra = true;
+                                    }
+                                }
+                                if(entra==false && (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height)) {
                                     this.figuras[this.figuraID].selected = false;
                                     this.figuraSeleccionada = false;
                                 }
                             } else if(
-                                p.mouseX >= this.figuras[this.figuraID].x  &&
+                                !(p.mouseX >= this.figuras[this.figuraID].x  &&
                                 p.mouseX <= this.figuras[this.figuraID].x + this.figuras[this.figuraID].w &&
                                 p.mouseY >= this.figuras[this.figuraID].y - this.figuras[this.figuraID].h &&
-                                p.mouseY <= this.figuras[this.figuraID].y+8 &&
+                                p.mouseY <= this.figuras[this.figuraID].y+8) &&
                                 this.figuras[this.figuraID].type==='text') {
                                 if (this.figuraID !== null && (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height)) {
                                     this.figuras[this.figuraID].selected = false;
@@ -706,8 +732,7 @@
                                 let rectY5 = Math.min(this.figuras[this.figuraID].y1, this.figuras[this.figuraID].y2);
                                 let rectWidth5 = Math.abs(this.figuras[this.figuraID].x2 - this.figuras[this.figuraID].x1);
                                 let rectHeight5 = Math.abs(this.figuras[this.figuraID].y2 - this.figuras[this.figuraID].y1);
-                                
-                                if (p.mouseX >= rectX5 && p.mouseX <= rectX5 + rectWidth5 && p.mouseY >= rectY5 && p.mouseY <= rectY5 + rectHeight5) {
+                                if (!(p.mouseX >= rectX5 && p.mouseX <= rectX5 + rectWidth5 && p.mouseY >= rectY5 && p.mouseY <= rectY5 + rectHeight5)) {
                                     if (this.figuraID !== null && (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height)) {
                                         this.figuras[this.figuraID].selected = false;
                                         this.figuraSeleccionada = false;

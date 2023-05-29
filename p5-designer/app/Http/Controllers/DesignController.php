@@ -13,7 +13,7 @@ class DesignController extends Controller
      */
     public function index()
     {
-        $designs = Design::where('user_id', auth()->id())->get();
+        $designs = Design::where('user_id', auth()->id())->orderBy('updated_at', 'desc')->get();
         return view('users.home', compact('designs'));
     }
 
