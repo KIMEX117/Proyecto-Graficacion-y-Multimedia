@@ -97,6 +97,29 @@
                 <div id="area-canvas" class="area-canvas d-flex justify-content-center align-items-center">
 
                 </div>
+                
+                {{-- ALERT SUCCESS AND ERROR --}}
+                @if (session('success')) 
+                    <!-- MESSAGE SUCCESS -->
+                    <div id="message-success" class="alert alert-success alert-dismissible fade show" role="alert">
+                        Se han guardado los cambios correctamente.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @elseif (session('error'))
+                    <!-- MESSAGE ERROR -->
+                    <div id="message-error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Ha surgido un error, no se pudieron guardar los cambios. 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                {{-- ALERTE RESIZE --}}
+                @unless (session()->has('success')||session()->has('error'))
+                    <!-- MESSAGE RESIZE -->
+                    <div id="message-resize" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <b>Modificar tamaño (resize):</b> <br> Al <i>seleccionar una figura</i>, puedes cambiar su tamaño <i>manteniendo presionada</i> la <b>tecla 'ctrl'</b>. <br>El ancho y largo será tomado en cuenta según la posición actual del cursor.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endunless
 
                 <!-- SIDEBAR OPTIONS -->
                 <div class="sidebar-options bgcolor-tertiary">
@@ -324,6 +347,7 @@
                     tipoFigura: '',
                     puntoInicio: [],
                     puntoFinal: [],
+                    ctrlPresionado: false,
                 }
             },
             created() {
@@ -457,9 +481,22 @@
                     } else {
                         return '';
                     }
-                }
+                },
+                detectarCtrlPresionado(event) {
+                    if (event.key === 'Control') {
+                        this.ctrlPresionado = true;
+                    }
+                },
+                detectarCtrlSoltado(event) {
+                    if (event.key === 'Control') {
+                        this.ctrlPresionado = false;
+                    }
+                },
             },
             mounted() {
+                document.addEventListener('keydown', this.detectarCtrlPresionado);
+                document.addEventListener('keyup', this.detectarCtrlSoltado);
+
                 //CANVAS
                 new p5((p) => {
                     let offsetX = 0;
@@ -521,6 +558,18 @@
                                     p.line(this.puntoInicio.x, this.puntoInicio.y, p.mouseX, p.mouseY);
                                 } else if(this.tipoFigura==='ellipse') {
                                     p.ellipse(this.puntoInicio.x+((p.mouseX-this.puntoInicio.x)/2), this.puntoInicio.y+((p.mouseY-this.puntoInicio.y)/2), (p.mouseX-this.puntoInicio.x), (p.mouseY-this.puntoInicio.y));
+                                }
+                            }
+                        }
+                        
+                        if(this.figuraID!=null) {
+                            if(this.figuras[this.figuraID].selected==true) {
+                                if (this.ctrlPresionado) {
+                                    if(this.figuras[this.figuraID].type==='rect'||this.figuras[this.figuraID].type==='ellipse') {
+                                        this.figuras[this.figuraID].updateMedidas(this.figuras[this.figuraID].x, this.figuras[this.figuraID].y, p.mouseX - this.figuras[this.figuraID].x, p.mouseY - this.figuras[this.figuraID].y);
+                                    } else if(this.figuras[this.figuraID].type==='line') {
+                                        this.figuras[this.figuraID].updateLinea(this.figuras[this.figuraID].x1, this.figuras[this.figuraID].y1, p.mouseX, p.mouseY);
+                                    }
                                 }
                             }
                         }

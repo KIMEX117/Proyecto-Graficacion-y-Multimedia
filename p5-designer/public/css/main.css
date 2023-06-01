@@ -872,4 +872,17 @@ footer .footerContactanos {
 .btn-color-green { background-color: #93FFC6; }
 .btn-color-blue { background-color: #B0C2F2; }
 
-
+/*~~~~~~~~~~~~~~~~~~~~~~*/
+/*    MESSAGE RESIZE    */
+/*~~~~~~~~~~~~~~~~~~~~~~*/
+#message-resize, #message-success, #message-error {
+    position: absolute;
+    top: 55px;
+    right: 260px;
+    width: 450px;
+    line-height: 1.25;
+    text-align: justify;
+}
+#message-resize > b:first-child {
+    line-height: 1.5;
+}
